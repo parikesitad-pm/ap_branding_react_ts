@@ -1,0 +1,236 @@
+/* ==========================================================================
+   Developer Console (CLI Easter Egg) Styles
+   ========================================================================== */
+
+.cli-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(11, 29, 58, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  animation: cliFadeIn 0.2s ease-out;
+}
+
+@keyframes cliFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cli-terminal-window {
+  width: 100%;
+  max-width: 720px;
+  background: var(--ink);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 80vh;
+  animation: cliScaleUp 0.25s var(--ease-out);
+}
+
+@keyframes cliScaleUp {
+  from {
+    transform: scale(0.97) translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.cli-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cli-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cli-window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.dot--red { background-color: #ff5f56; }
+.dot--yellow { background-color: #ffbd2e; }
+.dot--green { background-color: #27c93f; }
+
+.cli-window-title {
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--chalk);
+}
+
+.cli-close-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  transition: color var(--transition-fast) ease, background-color var(--transition-fast) ease;
+}
+
+.cli-close-btn:hover,
+.cli-close-btn:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+/* Terminal Screen */
+.cli-terminal-screen {
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--chalk);
+  overflow-y: auto;
+  min-height: 240px;
+  max-height: 50vh;
+  cursor: text;
+}
+
+.cli-banner-text {
+  color: var(--chalk);
+}
+
+.cli-banner-accent {
+  color: var(--flare);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.cli-banner-sub {
+  color: var(--text-muted);
+}
+
+.cli-banner-prompt-hint {
+  color: var(--cobalt);
+}
+
+.cli-log-line {
+  margin-bottom: 0.75rem;
+}
+
+.cli-log--input {
+  color: var(--flare);
+  font-weight: 600;
+}
+
+.cli-log--output {
+  color: var(--chalk);
+}
+
+.cli-log--success {
+  color: #27c93f;
+}
+
+.cli-log--error {
+  color: #ff5f56;
+}
+
+.cli-help-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--text-muted);
+}
+
+.cli-cmd-name {
+  color: var(--flare);
+  font-weight: 700;
+}
+
+.cli-accent {
+  color: var(--flare);
+  font-weight: 700;
+}
+
+.cli-muted-text {
+  color: var(--text-muted);
+  margin: 0.35rem 0 0 0;
+}
+
+.cli-hire-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.cli-hire-list {
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.cli-sub {
+  color: var(--cobalt);
+}
+
+.cli-wa-link {
+  color: #27c93f;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.cli-wa-link:hover {
+  color: #fff;
+}
+
+/* Input Bar */
+.cli-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cli-input-prompt {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--flare);
+}
+
+.cli-terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--chalk);
+  outline: none;
+}
+
+.cli-terminal-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cli-dialog-backdrop,
+  .cli-terminal-window {
+    animation: none !important;
+  }
+}

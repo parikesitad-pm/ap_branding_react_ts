@@ -53,6 +53,8 @@ export interface TranslationSchema {
   };
   disciplines: {
     title: string;
+    viewInReel: string;
+    infoOnly: string;
     d3d: {
       title: string;
       desc: string;
@@ -76,7 +78,13 @@ export interface TranslationSchema {
   };
   about: {
     title: string;
+    eyebrow: string;
+    headline: string;
     bio: string;
+    locationLabel: string;
+    locationValue: string;
+    disciplinesLabel: string;
+    milestonesTitle: string;
   };
   timeline: {
     entry1: {
@@ -89,11 +97,39 @@ export interface TranslationSchema {
       role: string;
       desc: string;
     };
+    entry3: {
+      title: string;
+      role: string;
+      desc: string;
+    };
+  };
+  video: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    cta: string;
+    modalTitle: string;
+    closeModal: string;
   };
   contact: {
-    title: string;
+    headline: string;
+    subheadline: string;
     lead: string;
     emailLabel: string;
+    socialsLabel: string;
+    placeholderNote: string;
+    salesPitch: string;
+    salesSub: string;
+    salesCta: string;
+    attributionPrefix: string;
+    attributionSuffix: string;
+    rights: string;
+  };
+  cli: {
+    openButton: string;
+    closeButton: string;
+    title: string;
+    inputPlaceholder: string;
   };
   theme: {
     toggleLight: string;
@@ -105,6 +141,7 @@ export interface TranslationSchema {
     menuOpen: string;
     menuClose: string;
     progress: string;
+    cursorLabel: string;
   };
   common: {
     placeholderNotice: string;

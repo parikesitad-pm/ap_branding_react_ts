@@ -21,6 +21,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ project, index }) => {
       data-category={project.category}
       data-layout={layout}
       data-index={index + 1}
+      data-cursor="view"
       tabIndex={0}
       aria-label={`${project.title} (${project.year})`}
     >

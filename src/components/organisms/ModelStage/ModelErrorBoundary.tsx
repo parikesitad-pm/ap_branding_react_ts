@@ -35,3 +35,4 @@ export class ModelErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
+

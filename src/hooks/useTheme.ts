@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'ap_theme';
+const EVENT_KEY = 'ap-theme-change';
 
 function getSystemTheme(): Theme {
   if (typeof window !== 'undefined' && window.matchMedia) {
@@ -23,11 +24,46 @@ function getInitialTheme(): Theme {
   return getSystemTheme();
 }
 
-export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+function applyThemeWithTransition(nextTheme: Theme, callback: () => void) {
+  // If View Transitions API is supported, use it for circular / smooth transition
+  const doc = document as unknown as {
+    startViewTransition?: (cb: () => void) => { ready: Promise<void>; finished: Promise<void> };
+  };
 
+  if (typeof doc.startViewTransition === 'function') {
+    doc.startViewTransition(() => {
+      callback();
+      document.documentElement.setAttribute('data-theme', nextTheme);
+    });
+  } else {
+    // Graceful fallback with short class-based fade
+    document.documentElement.classList.add('theme-transitioning');
+    callback();
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 250);
+  }
+}
+
+export function useTheme() {
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
+
+  // Sync across instances via window custom event
   useEffect(() => {
-    // Ensure document attribute is in sync
+    const handleThemeChange = (e: Event) => {
+      const customEvent = e as CustomEvent<Theme>;
+      if (customEvent.detail && (customEvent.detail === 'light' || customEvent.detail === 'dark')) {
+        setThemeState(customEvent.detail);
+      }
+    };
+
+    window.addEventListener(EVENT_KEY, handleThemeChange);
+    return () => window.removeEventListener(EVENT_KEY, handleThemeChange);
+  }, []);
+
+  // Ensure document attribute is in sync on mount
+  useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
@@ -39,8 +75,9 @@ export function useTheme() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) {
           const newTheme = e.matches ? 'dark' : 'light';
-          setTheme(newTheme);
+          setThemeState(newTheme);
           document.documentElement.setAttribute('data-theme', newTheme);
+          window.dispatchEvent(new CustomEvent<Theme>(EVENT_KEY, { detail: newTheme }));
         }
       } catch {
         // LocalStorage inaccessible
@@ -51,28 +88,22 @@ export function useTheme() {
     return () => media.removeEventListener('change', handleChange);
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === 'light' ? 'dark' : 'light';
+  const setThemeExplicit = useCallback((newTheme: Theme) => {
+    applyThemeWithTransition(newTheme, () => {
+      setThemeState(newTheme);
       try {
-        localStorage.setItem(STORAGE_KEY, next);
+        localStorage.setItem(STORAGE_KEY, newTheme);
       } catch {
         // LocalStorage inaccessible
       }
-      document.documentElement.setAttribute('data-theme', next);
-      return next;
+      window.dispatchEvent(new CustomEvent<Theme>(EVENT_KEY, { detail: newTheme }));
     });
   }, []);
 
-  const setThemeExplicit = useCallback((newTheme: Theme) => {
-    setTheme(newTheme);
-    try {
-      localStorage.setItem(STORAGE_KEY, newTheme);
-    } catch {
-      // LocalStorage inaccessible
-    }
-    document.documentElement.setAttribute('data-theme', newTheme);
-  }, []);
+  const toggleTheme = useCallback(() => {
+    const next: Theme = theme === 'light' ? 'dark' : 'light';
+    setThemeExplicit(next);
+  }, [theme, setThemeExplicit]);
 
   return {
     theme,
@@ -81,4 +112,3 @@ export function useTheme() {
     setTheme: setThemeExplicit,
   };
 }
-

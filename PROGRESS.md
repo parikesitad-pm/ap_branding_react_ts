@@ -5,7 +5,39 @@
 - [x] F2 Hero + Intro + Preloader
 - [x] F3 Horizontal Reel
 - [x] F4 ModelStage 3D
-- [ ] F5 Disciplines + About + Contact + VideoModal + Polish
+- [x] F5 Disciplines + About + Contact + VideoModal + Polish
+
+## Asumsi & Catatan F5
+
+- **What I Make interactions & Reel Connection**:
+  - Dibuat 5 baris disiplin (`Graphic Design`, `3D Modeling`, `Animation`, `Photography`, `Videography`) dengan motion vocabulary visual yang unik per disiplin (Graphic: layered type & grid preview; 3D: orbital wireframe response; Animation: kinetic oscillating bars; Photography: camera viewfinder corner brackets & focus dot; Videography: cinematic letterbox ratio dengan play cue).
+  - Row click terhubung langsung ke Horizontal Reel via custom event `'ap-filter-reel'`: Graphic → filter `graphic` + scroll `#work`; 3D → filter `3d` + scroll `#work`; Animation → filter `animation` + scroll `#work`; Photography → filter `photo` + scroll `#work`.
+  - Disiplin Videography bersifat informasional (tidak membuat kategori/proyek palsu karena belum ada aset video rilis resmi Afrizal), dilengkapi badge penjelas aksesibel dan scroll halus ke kontak jika user berencana commissioning. Seluruh teks diambil dari i18n tanpa hardcode string.
+- **About & Verified Timeline**:
+  - Komposisi editorial murni: "VISUALS ARE HOW I THINK", eyebrow Afrizal Pramudyan / Multidisciplinary Visual Designer, bio faktual konservatif (alumnus DKV Universitas Negeri Semarang, fokus 3D/CGI, motion, graphic, foto, video, berbasis Indonesia).
+  - Tanpa rating bintang, persentase keahlian ("90% Photoshop"), atau klaim klien yang belum diverifikasi.
+  - Timeline minimal mencakup milestone publik terverifikasi: 2024 Motion & CGI Exploration, 2022 Pameran Bersama "Disaster: It's a Human Thing", 2019 DKV Universitas Negeri Semarang.
+- **VideoModal Facade**:
+  - Bagian trigger "MEET AFRIZAL / WATCH INTRO ▶" menggunakan facade pattern: iframe YouTube TIDAK di-mount pada initial load.
+  - Video ID dinamis dari `import.meta.env.VITE_INTRO_VIDEO_ID || 'yR3IpNwjKfY'` (tidak di-hardcode di dalam komponen).
+  - Saat trigger diklik, modal terbuka dan me-mount iframe domain ramah privasi `youtube-nocookie.com`.
+  - Aksesibilitas penuh: `role="dialog"`, `aria-modal="true"`, focus trap keyboard, Escape to close, lock scroll body, focus return ke trigger button, serta unmount bersih iframe saat ditutup agar audio berhenti seketika.
+- **Active Custom Cursor & Magnetic Interactions**:
+  - Custom cursor aktif pada desktop pointer presisi (`pointer: fine`), otomatis nonaktif pada touch/coarse dan preferensi `prefers-reduced-motion: reduce`.
+  - Menggunakan GSAP `quickTo()` berlatensi rendah tanpa loop RAF konstan. Mode interaktif: `default`, `view` (kartu reel), `drag` (canvas 3D), `play` (trigger video), `external` (link luar). Otomatis kembali ke `default` di dalam dialog/modal.
+  - Tombol CTA terpilih (Hero, Explore in 3D, Watch Intro, Start a Project) dilengkapi efek magnetik berpegas (`gsap.to(inner, { ... elastic.out })`), nonaktif pada touch dan reduced motion.
+- **Developer CLI Easter Egg**:
+  - Terminal modal ringan yang dipicu via tombol subtle `>_` di footer.
+  - Menggunakan React state murni dan parser bertipe kuat (`type CommandName`), tanpa eval, tanpa shell execution, dan tanpa library terminal eksternal.
+  - Mendukung 11 perintah: `help`, `about`, `work`, `3d`, `intro`, `contact`, `github`, `hire`, `theme [light|dark]`, `lang [en|zh-CN|ja|ko]`, `clear`.
+  - Terkoneksi langsung dengan sistem tema dan i18n aplikasi via `useTheme` dan `useLocale`. Koordinasi modal terjaga: perintah `intro` menutup console sebelum membuka video modal.
+- **Final Polish (Theme, I18n, A11y, SEO)**:
+  - Theme toggle mendukung native View Transitions API (`document.startViewTransition`) dengan fallback transisi opacity halus, tersinkronisasi antar-komponen via custom event.
+  - I18n lengkap 100% di 4 bahasa (`en`, `zh-CN`, `ja`, `ko`) tanpa string `TODO_TRANSLATE`.
+  - Semantic HTML landmarks, heading tunggal `h1`, focus outline kontras tinggi, Safe external link (`rel="noopener noreferrer"`).
+  - SEO meta tags: judul definitif, meta description, Open Graph, Twitter cards, meta creator/author, dan source signature colophon di entry files.
+- **Real Asset Status**:
+  - Seluruh layout dan interaksi F0–F5 kini lengkap. Proyek 3D dan visual tetap menyajikan label literal eksplisit (`[3D ASSET PENDING]`, `[EMAIL]`, dll.) siap menerima aset master resmi Afrizal melalui panduan di README.
 
 ## Asumsi & Catatan F4
 
@@ -62,38 +94,3 @@
 - **Reduced-motion fallback**: Pengguna dengan preferensi `prefers-reduced-motion: reduce` menerima layout native horizontal scroll tanpa pin atau transform animation, menjaga kenyamanan dan aksesibilitas penuh.
 - **Placeholder asset status**: Menampilkan 8 proyek placeholder terstruktur dengan asymmetric aspect ratio (`portrait`, `tall`, `landscape`, `wide`, `square`) dan editorial stagger alignment (`up`, `down`, `center`). Media container menggunakan wireframe SVG geometris dan label literal (`[3D MODEL PLACEHOLDER]`, `[PROJECT POSTER]`, dll.) tanpa artwork fiktif. Kartu 3D diutamakan dengan border Flare dan visual depth tanpa Three.js Canvas. Panel editorial Start, Process Note, dan Closing terintegrasi rapi di dalam rail.
 - Build production lolos verifikasi (`npm run build`).
-
-## Specifications for Future Phases
-
-### F5 — Developer CLI Easter Egg Specification
-- **Trigger**: Subtle `>_` button atau "open developer console" in footer.
-- **Implementation**: Pure React state + typed parser (NO external terminal libraries).
-- **Opening copy**:
-  ```text
-  AP // PORTFOLIO TERMINAL
-  crafted with <3 by parikesitad-pm
-
-  Hello, curious human.
-
-  portfolio.owner = "Afrizal Pramudyan";
-  portfolio.focus = "3D / CGI";
-  portfolio.status = "creating";
-
-  crafted.by = "parikesitad-pm";
-  github = "github.com/parikesitad-pm";
-
-  type "help" to explore.
-  ```
-- **Commands**:
-  - `help`: List available commands
-  - `about`: Display Afrizal bio / focus
-  - `work`: Scroll to #work
-  - `3d`: Scroll/filter to 3D stage
-  - `intro`: Trigger VideoModal self-intro
-  - `contact`: Scroll to #contact
-  - `github`: Open https://github.com/parikesitad-pm
-  - `hire`: Display MODULA service info & WhatsApp CTA link (https://wa.me/6282298503412)
-  - `theme light|dark`: Toggle theme
-  - `lang en|zh-CN|ja|ko`: Switch language
-  - `clear`: Clear output history
-- **Accessibility & UX**: Keyboard accessible, Esc closes terminal, focus trapped and returned to trigger on close, mobile responsive, non-intrusive.

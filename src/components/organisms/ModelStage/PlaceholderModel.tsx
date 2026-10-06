@@ -194,3 +194,4 @@ export const PlaceholderModel: React.FC<PlaceholderModelProps> = ({
     </group>
   );
 };
+

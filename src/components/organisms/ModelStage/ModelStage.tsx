@@ -128,6 +128,32 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '' }) => {
     }, 50);
   };
 
+  const handleExplorePointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (
+      typeof window === 'undefined' ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    const btn = exploreBtnRef.current;
+    if (!btn) return;
+    const inner = btn.querySelector<HTMLElement>('.magnetic-inner');
+    if (!inner) return;
+    const rect = btn.getBoundingClientRect();
+    const relX = (e.clientX - rect.left - rect.width / 2) * 0.3;
+    const relY = (e.clientY - rect.top - rect.height / 2) * 0.3;
+    gsap.to(inner, { x: relX, y: relY, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
+  };
+
+  const handleExplorePointerLeave = () => {
+    const btn = exploreBtnRef.current;
+    if (!btn) return;
+    const inner = btn.querySelector<HTMLElement>('.magnetic-inner');
+    if (!inner) return;
+    gsap.to(inner, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1, 0.35)', overwrite: 'auto' });
+  };
+
   return (
     <section
       id="3d"
@@ -251,6 +277,8 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '' }) => {
             type="button"
             className="stage-explore-cta magnetic-wrap"
             onClick={handleOpenModal}
+            onPointerMove={handleExplorePointerMove}
+            onPointerLeave={handleExplorePointerLeave}
             aria-label={`${t.stage3d.exploreIn3D} - ${activeProject.title}`}
           >
             <span className="magnetic-inner">{t.stage3d.exploreIn3D}</span>
@@ -273,3 +301,4 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '' }) => {
     </section>
   );
 };
+

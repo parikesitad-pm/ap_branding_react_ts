@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header } from '../../organisms/Header/Header';
+import { Cursor } from '../../atoms/Cursor/Cursor';
 import { useLenis } from '../../../hooks/useLenis';
 import './PageLayout.css';
 
@@ -17,6 +18,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 
   return (
     <div className="page-layout">
+      <Cursor />
       <Header variant={headerVariant} />
       <main className="page-main" id="main-content">
         {children}

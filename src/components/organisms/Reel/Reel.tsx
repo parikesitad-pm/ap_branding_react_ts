@@ -139,6 +139,19 @@ export const Reel: React.FC = () => {
     return () => track.removeEventListener('scroll', handleScroll);
   }, [isNativeScroll, updateActiveIndexFromTrack]);
 
+  // Listen for filter commands dispatched from Disciplines or CLI
+  useEffect(() => {
+    const handleFilterEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ category: Category | 'all' }>;
+      if (customEvent.detail && customEvent.detail.category) {
+        handleFilterChange(customEvent.detail.category);
+      }
+    };
+
+    window.addEventListener('ap-filter-reel', handleFilterEvent);
+    return () => window.removeEventListener('ap-filter-reel', handleFilterEvent);
+  }, [activeCategory, isNativeScroll]);
+
   // Filter change handler with predictable reset & Flip transition
   const handleFilterChange = (cat: Category | 'all') => {
     if (cat === activeCategory) return;

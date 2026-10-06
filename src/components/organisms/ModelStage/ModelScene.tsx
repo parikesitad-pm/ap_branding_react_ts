@@ -146,3 +146,4 @@ export const ModelScene: React.FC<ModelSceneProps> = ({
     </>
   );
 };
+

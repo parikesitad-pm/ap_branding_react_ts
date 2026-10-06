@@ -3,7 +3,7 @@ import type { SiteMeta, DisciplineItem } from './types';
 export const siteMeta: SiteMeta = {
   name: 'Afrizal Pramudyan',
   title: 'Multidisciplinary Visual Designer',
-  bioKey: 'bio',
+  bioKey: 'about.bio',
   email: '[EMAIL]',
   socials: [
     { label: 'Instagram', url: '[INSTAGRAM]' },
@@ -14,29 +14,28 @@ export const siteMeta: SiteMeta = {
 
 export const disciplinesList: DisciplineItem[] = [
   {
-    id: '3d',
-    titleKey: 'discipline.3d.title',
-    descKey: 'discipline.3d.desc',
+    id: 'graphic',
+    titleKey: 'disciplines.graphic.title',
+    descKey: 'disciplines.graphic.desc',
   },
   {
-    id: 'graphic',
-    titleKey: 'discipline.graphic.title',
-    descKey: 'discipline.graphic.desc',
+    id: '3d',
+    titleKey: 'disciplines.d3d.title',
+    descKey: 'disciplines.d3d.desc',
   },
   {
     id: 'animation',
-    titleKey: 'discipline.animation.title',
-    descKey: 'discipline.animation.desc',
+    titleKey: 'disciplines.animation.title',
+    descKey: 'disciplines.animation.desc',
   },
   {
     id: 'photo',
-    titleKey: 'discipline.photo.title',
-    descKey: 'discipline.photo.desc',
+    titleKey: 'disciplines.photo.title',
+    descKey: 'disciplines.photo.desc',
   },
   {
     id: 'videography',
-    titleKey: 'discipline.videography.title',
-    descKey: 'discipline.videography.desc',
+    titleKey: 'disciplines.videography.title',
+    descKey: 'disciplines.videography.desc',
   },
 ];
-

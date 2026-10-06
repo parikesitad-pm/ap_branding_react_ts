@@ -1,52 +1,94 @@
+/* ==========================================================================
+   Active Custom Cursor
+   ========================================================================== */
+
 .app-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   pointer-events: none;
   user-select: none;
+  transform: translate(-50%, -50%);
+  transition: opacity var(--transition-fast) ease;
+  will-change: transform;
+}
+
+.app-cursor.is-hidden {
+  opacity: 0;
+}
+
+.app-cursor.is-visible {
+  opacity: 1;
 }
 
 .app-cursor__pointer {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
-  background: var(--flare);
-  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  background-color: var(--flare);
+  box-shadow: 0 0 10px rgba(255, 61, 0, 0.4);
+  transition: width 0.22s var(--ease-out),
+              height 0.22s var(--ease-out),
+              background-color 0.22s var(--ease-out),
+              box-shadow 0.22s var(--ease-out),
+              border-radius 0.22s var(--ease-out);
 }
 
 .app-cursor__label {
-  margin-left: 0.5rem;
+  margin-left: 0.625rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: var(--fg);
   text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* Modes */
 .app-cursor--view .app-cursor__pointer {
-  width: 28px;
-  height: 28px;
-  background: var(--cobalt);
-  opacity: 0.85;
+  width: 32px;
+  height: 32px;
+  background-color: var(--cobalt);
+  box-shadow: 0 0 16px rgba(0, 56, 255, 0.45);
 }
 
 .app-cursor--drag .app-cursor__pointer {
-  width: 24px;
-  height: 24px;
-  background: var(--flare);
+  width: 28px;
+  height: 28px;
+  background-color: var(--flare);
+  box-shadow: 0 0 14px rgba(255, 61, 0, 0.5);
 }
 
 .app-cursor--play .app-cursor__pointer {
-  width: 32px;
-  height: 32px;
-  background: var(--ink);
+  width: 36px;
+  height: 36px;
+  background-color: var(--ink);
+  border: 2px solid var(--flare);
+  box-shadow: 0 0 20px rgba(255, 61, 0, 0.35);
 }
 
 .app-cursor--external .app-cursor__pointer {
-  width: 16px;
-  height: 16px;
-  background: var(--cobalt);
+  width: 18px;
+  height: 18px;
+  background-color: var(--cobalt);
+  box-shadow: 0 0 8px rgba(0, 56, 255, 0.35);
 }
 
+/* Reduced motion & touch guards */
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .app-cursor {
+    display: none !important;
+  }
+}

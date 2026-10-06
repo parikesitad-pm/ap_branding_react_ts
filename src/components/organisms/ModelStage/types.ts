@@ -39,3 +39,4 @@ export interface ModelViewerModalProps {
   onSelectProject: (index: number) => void;
   onStageModeChange: (mode: StageMode) => void;
 }
+

@@ -1,0 +1,283 @@
+/* ==========================================================================
+   Watch Intro Section & Video Modal Styles
+   ========================================================================== */
+
+/* Watch Intro Section */
+.watch-intro-section {
+  position: relative;
+  background-color: var(--bg);
+  padding: clamp(4rem, 8vh, 7rem) var(--space-container);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.watch-intro-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.watch-intro-card {
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  background-color: var(--surface);
+  overflow: hidden;
+  cursor: pointer;
+  padding: clamp(3rem, 6vh, 5.5rem) clamp(2rem, 5vw, 4rem);
+  transition: border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+  user-select: none;
+}
+
+.watch-intro-card:hover,
+.watch-intro-card:focus-visible {
+  border-color: var(--flare);
+  box-shadow: 0 12px 32px rgba(255, 61, 0, 0.08);
+}
+
+.watch-intro-card:focus-visible {
+  outline: 2px solid var(--flare);
+  outline-offset: -2px;
+}
+
+.watch-intro-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.intro-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+}
+
+.intro-radial-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 61, 0, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.watch-intro-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.watch-intro-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: clamp(2rem, 4vh, 3.5rem);
+}
+
+.watch-intro-index {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--flare);
+  text-transform: uppercase;
+}
+
+.watch-intro-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.6rem;
+  background: rgba(255, 61, 0, 0.12);
+  color: var(--flare);
+  border: 1px solid rgba(255, 61, 0, 0.25);
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.watch-intro-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.intro-play-disc {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: var(--ink);
+  border: 2px solid var(--flare);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 0 24px rgba(255, 61, 0, 0.35);
+  transition: transform 0.3s var(--ease-out), background-color 0.3s ease;
+}
+
+.watch-intro-card:hover .intro-play-disc {
+  transform: scale(1.1);
+  background: var(--flare);
+}
+
+.intro-play-triangle {
+  color: var(--chalk);
+  font-size: 1.25rem;
+  margin-left: 3px;
+  transition: transform 0.2s ease;
+}
+
+.watch-intro-card:hover .intro-play-triangle {
+  color: var(--ink);
+}
+
+.watch-intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+  color: var(--fg);
+}
+
+.watch-intro-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.watch-intro-action-wrap {
+  margin-top: 0.5rem;
+}
+
+/* Modal Dialog */
+.video-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(11, 29, 58, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.video-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  background: var(--ink);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: modalScaleUp 0.3s var(--ease-out);
+}
+
+@keyframes modalScaleUp {
+  from {
+    transform: scale(0.96) translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.video-modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.video-modal-pill {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: var(--flare);
+  background: rgba(255, 61, 0, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.video-modal-title {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.video-modal-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+}
+
+.video-modal-close:hover,
+.video-modal-close:focus-visible {
+  background-color: var(--flare);
+  color: #000;
+  outline: none;
+}
+
+.video-modal-player-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: #000;
+}
+
+.video-modal-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-modal-backdrop,
+  .video-modal-dialog {
+    animation: none !important;
+  }
+}

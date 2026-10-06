@@ -48,3 +48,4 @@ export const ModelCanvas: React.FC<ModelCanvasProps> = ({
 };
 
 export default ModelCanvas;
+

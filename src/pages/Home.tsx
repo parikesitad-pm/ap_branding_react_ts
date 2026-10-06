@@ -5,11 +5,19 @@ import { Hero } from '../components/organisms/Hero/Hero';
 import { Intro } from '../components/organisms/Intro/Intro';
 import { Reel } from '../components/organisms/Reel/Reel';
 import { ModelStage } from '../components/organisms/ModelStage/ModelStage';
-import { siteMeta } from '../data/site';
+import { Disciplines } from '../components/organisms/Disciplines/Disciplines';
+import { About } from '../components/organisms/About/About';
+import { WatchIntroSection, VideoModal } from '../components/organisms/VideoModal';
+import { ContactFooter } from '../components/organisms/ContactFooter/ContactFooter';
+import { DeveloperConsole } from '../components/organisms/DeveloperConsole/DeveloperConsole';
 import './Home.css';
 
 export const Home: React.FC = () => {
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+
+  const videoId = import.meta.env.VITE_INTRO_VIDEO_ID || 'yR3IpNwjKfY';
 
   return (
     <>
@@ -20,45 +28,42 @@ export const Home: React.FC = () => {
           {/* F2: Hero Section */}
           <Hero isReady={preloaderDone} />
 
-          {/* F2: Intro Section */}
+          {/* F2: Intro Statement */}
           <Intro />
 
           {/* F3: Selected Works / Horizontal Reel */}
           <Reel />
 
-          {/* F4: ModelStage 3D Centerpiece */}
+          {/* F4: 3D ModelStage Centerpiece */}
           <ModelStage />
 
-          {/* Anchor for Disciplines (Scheduled for F5) */}
-          <div id="disciplines" className="section-anchor-marker" aria-hidden="true" />
-          <div id="about" className="section-anchor-marker" aria-hidden="true" />
+          {/* F5: What I Make (Disciplines) */}
+          <Disciplines />
 
-          {/* Minimal Baseline Footer & Creator Attribution */}
-          <footer id="contact" className="site-footer-baseline">
-            <div className="footer-baseline-inner">
-              <div className="footer-contact-brief">
-                <span className="footer-owner">{siteMeta.name}</span>
-                <span className="footer-email">{siteMeta.email}</span>
-              </div>
+          {/* F5: About & Verified Timeline */}
+          <About />
 
-              <div className="footer-attribution-section">
-                <div className="attribution-colophon">
-                  <span>crafted by </span>
-                  <a
-                    href="https://github.com/parikesitad-pm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="attribution-link"
-                  >
-                    parikesitad-pm
-                  </a>
-                  <span> for Afrizal Pramudyan — a MODULA project</span>
-                </div>
-              </div>
-            </div>
-          </footer>
+          {/* F5: Meet Afrizal — Self Introduction Video Facade */}
+          <WatchIntroSection onOpenVideo={() => setIsVideoModalOpen(true)} />
+
+          {/* F5: Contact, Canonical Attribution, Developer CTA & CLI trigger */}
+          <ContactFooter onOpenConsole={() => setIsConsoleOpen(true)} />
         </div>
       </PageLayout>
+
+      {/* Video Modal (youtube-nocookie facade mount) */}
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        videoId={videoId}
+        onClose={() => setIsVideoModalOpen(false)}
+      />
+
+      {/* Developer CLI Easter Egg Terminal */}
+      <DeveloperConsole
+        isOpen={isConsoleOpen}
+        onClose={() => setIsConsoleOpen(false)}
+        onOpenVideo={() => setIsVideoModalOpen(true)}
+      />
     </>
   );
 };
