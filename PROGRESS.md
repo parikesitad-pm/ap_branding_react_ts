@@ -14,3 +14,4 @@
 - Intro video YouTube menggunakan ID placeholder dari `.env.example` (`VITE_INTRO_VIDEO_ID=yR3IpNwjKfY`).
 - Strict mode diaktifkan di TypeScript compiler options (`strict: true`, no `any`).
 - Build production lolos verifikasi (`dist/`).
+

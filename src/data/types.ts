@@ -59,3 +59,4 @@ export interface SiteMeta {
   email: string;
   socials: SocialLink[];
 }
+

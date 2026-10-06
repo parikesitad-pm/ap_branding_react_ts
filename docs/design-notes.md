@@ -127,3 +127,4 @@ Extracted from prototype reference: `afrizal-portfolio-mockup.html`.
   - Reel supports touch-friendly sideways swipe when motion is reduced or on mobile viewport.
 - **Focus States**: High contrast outline with Flare orange (`#FF5A2C`) or Chalk (`#EEF0FA`) depending on container background.
 - **Tabular Numerals**: `font-variant-numeric: tabular-nums` for project counters and timecodes.
+

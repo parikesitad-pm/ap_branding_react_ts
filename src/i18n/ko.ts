@@ -83,3 +83,4 @@ export const ko: TranslationSchema = {
     placeholderNotice: '포트폴리오 에셋 준비 중입니다. 공식 작품이 업데이트될 예정입니다.',
   },
 };
+

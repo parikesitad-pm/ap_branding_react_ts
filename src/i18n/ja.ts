@@ -83,3 +83,4 @@ export const ja: TranslationSchema = {
     placeholderNotice: 'ポートフォリオ素材は準備中です。公式作品は順次更新されます。',
   },
 };
+

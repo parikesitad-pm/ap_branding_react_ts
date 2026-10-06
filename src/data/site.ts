@@ -39,3 +39,4 @@ export const disciplinesList: DisciplineItem[] = [
     descKey: 'discipline.videography.desc',
   },
 ];
+

@@ -37,3 +37,4 @@
 
 - Prioritas: Visual identity, 3D presentation, motion, interaction, responsive quality, accessibility, reasonable delivery optimization.
 - "Optimize delivery, not ambition."
+

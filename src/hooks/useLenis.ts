@@ -41,3 +41,4 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
 
   return lenisRef;
 }
+

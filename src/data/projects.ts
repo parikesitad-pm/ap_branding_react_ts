@@ -58,3 +58,4 @@ export const projects: Project[] = [
     caption: '[PHOTO PLACEHOLDER 04]',
   },
 ];
+

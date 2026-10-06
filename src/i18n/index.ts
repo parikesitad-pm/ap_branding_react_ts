@@ -50,3 +50,4 @@ export function saveLocalePreference(locale: Locale): void {
     // LocalStorage inaccessible
   }
 }
+

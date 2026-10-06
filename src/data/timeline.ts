@@ -20,3 +20,4 @@ export const timelineEntries: TimelineEntry[] = [
     descKey: 'timeline.entry2.desc',
   },
 ];
+

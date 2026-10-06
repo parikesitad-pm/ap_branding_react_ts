@@ -33,3 +33,4 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
     </nav>
   );
 };
+
