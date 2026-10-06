@@ -133,7 +133,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
                   className="cli-trigger-btn"
                   onClick={onOpenConsole}
                   aria-label={t.cli.openButton}
-                  title="Open developer console (>_)"
+                  title="Open developer console (Ctrl/⌘ + `)"
                 >
                   <span className="cli-prompt-symbol">&gt;_</span>
                   <span className="cli-trigger-text">{t.cli.openButton}</span>
@@ -148,3 +148,4 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
     </footer>
   );
 };
+

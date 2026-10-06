@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageLayout } from '../components/templates/PageLayout/PageLayout';
 import { Preloader } from '../components/organisms/Preloader/Preloader';
 import { Hero } from '../components/organisms/Hero/Hero';
@@ -10,14 +10,55 @@ import { About } from '../components/organisms/About/About';
 import { WatchIntroSection, VideoModal } from '../components/organisms/VideoModal';
 import { ContactFooter } from '../components/organisms/ContactFooter/ContactFooter';
 import { DeveloperConsole } from '../components/organisms/DeveloperConsole/DeveloperConsole';
+import { ConsoleTrigger } from '../components/atoms/ConsoleTrigger/ConsoleTrigger';
 import './Home.css';
 
 export const Home: React.FC = () => {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  const [isModelModalOpen, setIsModelModalOpen] = useState(false);
 
   const videoId = import.meta.env.VITE_INTRO_VIDEO_ID || 'yR3IpNwjKfY';
+
+  // Keyboard shortcut: Ctrl + ` or Cmd + ` toggles DeveloperConsole
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+        const target = e.target as HTMLElement | null;
+        const isInput =
+          target &&
+          (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable);
+
+        // If console is already open, pressing shortcut toggles it closed
+        if (isConsoleOpen) {
+          e.preventDefault();
+          setIsConsoleOpen(false);
+          return;
+        }
+
+        // If another modal has focus, ignore shortcut
+        if (isVideoModalOpen || isModelModalOpen) {
+          return;
+        }
+
+        // If user is typing in regular input/textarea outside console, ignore
+        if (isInput) {
+          return;
+        }
+
+        e.preventDefault();
+        setIsConsoleOpen(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [isConsoleOpen, isVideoModalOpen, isModelModalOpen]);
+
+  const isAnyModalOpen = isConsoleOpen || isVideoModalOpen || isModelModalOpen;
 
   return (
     <>
@@ -35,7 +76,7 @@ export const Home: React.FC = () => {
           <Reel />
 
           {/* F4: 3D ModelStage Centerpiece */}
-          <ModelStage />
+          <ModelStage onModalStateChange={setIsModelModalOpen} />
 
           {/* F5: What I Make (Disciplines) */}
           <Disciplines />
@@ -50,6 +91,12 @@ export const Home: React.FC = () => {
           <ContactFooter onOpenConsole={() => setIsConsoleOpen(true)} />
         </div>
       </PageLayout>
+
+      {/* Floating Developer CLI Trigger (>_) */}
+      <ConsoleTrigger
+        onClick={() => setIsConsoleOpen(true)}
+        isVisible={preloaderDone && !isAnyModalOpen}
+      />
 
       {/* Video Modal (youtube-nocookie facade mount) */}
       <VideoModal

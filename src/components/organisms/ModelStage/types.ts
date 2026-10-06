@@ -4,6 +4,7 @@ export type StageMode = 'final' | 'shaded' | 'wireframe';
 
 export interface ModelStageProps {
   className?: string;
+  onModalStateChange?: (isOpen: boolean) => void;
 }
 
 export interface ModelSceneProps {

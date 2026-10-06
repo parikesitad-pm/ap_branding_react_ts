@@ -187,3 +187,4 @@ export const Disciplines: React.FC<DisciplinesProps> = ({ className = '' }) => {
     </section>
   );
 };
+

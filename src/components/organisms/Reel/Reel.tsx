@@ -20,6 +20,7 @@ export const Reel: React.FC = () => {
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
   const activeIndexRef = useRef<number>(1);
   activeIndexRef.current = activeCardIndex;
 
@@ -32,12 +33,15 @@ export const Reel: React.FC = () => {
   // Calculate nearest project card based on horizontal position
   const updateActiveIndexFromTrack = useCallback(() => {
     const track = trackRef.current;
+    const viewport = viewportRef.current;
     if (!track) return;
 
     const cards = track.querySelectorAll<HTMLElement>('.reel-card');
     if (!cards.length) return;
 
-    const viewportCenter = window.innerWidth / 2;
+    const viewportCenter = viewport
+      ? viewport.getBoundingClientRect().left + viewport.clientWidth / 2
+      : window.innerWidth / 2;
     let closestIndex = 1;
     let minDiff = Infinity;
 
@@ -76,25 +80,43 @@ export const Reel: React.FC = () => {
 
     const section = sectionRef.current;
     const track = trackRef.current;
+    const viewport = viewportRef.current;
     if (!section || !track) return;
 
     let ctx: gsap.Context | null = null;
+    let isCancelled = false;
+    let rafId: number | null = null;
 
     // Small delay to ensure layout measurements are ready
     const timer = setTimeout(() => {
       ctx = gsap.context(() => {
-        const getScrollDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+        const END_BREATHING_ROOM = 48;
+
+        const getHorizontalDistance = () => {
+          const trackEl = trackRef.current;
+          const vpEl = viewportRef.current;
+          if (!trackEl) return 0;
+          const vpWidth = vpEl ? vpEl.clientWidth : window.innerWidth;
+          return Math.max(0, trackEl.scrollWidth - vpWidth + END_BREATHING_ROOM);
+        };
+
+        const getScrollDuration = () => {
+          const horizontalDistance = getHorizontalDistance();
+          return Math.max(window.innerHeight * 1.25, horizontalDistance * 1.4);
+        };
 
         gsap.to(track, {
-          x: () => -getScrollDistance(),
+          x: () => -getHorizontalDistance(),
           ease: 'none',
           scrollTrigger: {
             id: 'reel-horizontal',
             trigger: section,
             start: 'top top',
-            end: () => `+=${getScrollDistance()}`,
+            end: () => `+=${getScrollDuration()}`,
             pin: true,
-            scrub: 1,
+            pinSpacing: true,
+            scrub: 1.15,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               const currentProgress = Math.round(self.progress * 100);
@@ -106,14 +128,31 @@ export const Reel: React.FC = () => {
       }, sectionRef);
     }, 50);
 
-    // Refresh ScrollTrigger on resize or layout changes
+    // Refresh ScrollTrigger once fonts are ready
+    if (typeof document !== 'undefined' && 'fonts' in document) {
+      document.fonts.ready.then(() => {
+        if (!isCancelled) {
+          ScrollTrigger.refresh();
+        }
+      });
+    }
+
+    // Refresh ScrollTrigger on resize or layout changes with RAF guard
     const resizeObserver = new ResizeObserver(() => {
-      ScrollTrigger.refresh();
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     });
     resizeObserver.observe(track);
+    if (viewport) {
+      resizeObserver.observe(viewport);
+    }
 
     return () => {
+      isCancelled = true;
       clearTimeout(timer);
+      if (rafId) cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
       if (ctx) ctx.revert();
     };
@@ -235,7 +274,7 @@ export const Reel: React.FC = () => {
       </header>
 
       {/* Horizontal Rail Container */}
-      <div className="reel-track-viewport">
+      <div ref={viewportRef} className="reel-track-viewport">
         <div ref={trackRef} className="reel-track" role="region" aria-label="Horizontal project track">
           {/* Start Editorial Panel */}
           <div className="reel-panel reel-panel--start" aria-label="Reel introduction panel">

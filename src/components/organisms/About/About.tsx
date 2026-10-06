@@ -102,3 +102,4 @@ export const About: React.FC<AboutProps> = ({ className = '' }) => {
     </section>
   );
 };
+

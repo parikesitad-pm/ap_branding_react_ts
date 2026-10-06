@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Console Trigger Floating Button
+   ========================================================================== */
+
+.console-trigger-floating {
+  position: fixed;
+  right: calc(clamp(1rem, 2vw, 1.5rem) + env(safe-area-inset-right, 0px));
+  bottom: calc(clamp(1rem, 2vw, 1.5rem) + env(safe-area-inset-bottom, 0px));
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 0.85rem;
+  background-color: rgba(10, 12, 43, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--chalk);
+  border: 1px solid rgba(185, 188, 255, 0.2);
+  border-radius: 22px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.console-trigger-floating:hover {
+  border-color: var(--flare);
+  color: var(--flare);
+  background-color: rgba(10, 12, 43, 0.98);
+  box-shadow: 0 6px 20px rgba(255, 90, 44, 0.28);
+  transform: translateY(-2px);
+}
+
+.console-trigger-floating:active {
+  transform: translateY(0);
+}
+
+.console-trigger-floating:focus-visible {
+  outline: 2px solid var(--flare);
+  outline-offset: 2px;
+}
+
+.console-trigger-prompt {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 640px) {
+  .console-trigger-floating {
+    min-width: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+  }
+}

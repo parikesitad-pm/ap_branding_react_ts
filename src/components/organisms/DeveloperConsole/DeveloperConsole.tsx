@@ -67,10 +67,15 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const skipRestoreFocusRef = useRef<boolean>(false);
 
-  // Focus & Escape handling
+  // Focus trap, focus restoration & Escape handling
   useEffect(() => {
     if (!isOpen) return;
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    skipRestoreFocusRef.current = false;
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -83,6 +88,36 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
       if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+
+        const focusables = dialog.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (!focusables.length) {
+          e.preventDefault();
+          return;
+        }
+
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || !dialog.contains(document.activeElement)) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement || !dialog.contains(document.activeElement)) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
 
@@ -92,6 +127,13 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
       clearTimeout(timer);
       document.body.style.overflow = originalOverflow;
       window.removeEventListener('keydown', handleKeyDown);
+
+      if (!skipRestoreFocusRef.current && previouslyFocusedRef.current) {
+        const elToFocus = previouslyFocusedRef.current;
+        requestAnimationFrame(() => {
+          elToFocus.focus();
+        });
+      }
     };
   }, [isOpen, onClose]);
 
@@ -107,6 +149,7 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (el) {
+      skipRestoreFocusRef.current = true;
       onClose();
       window.setTimeout(() => {
         el.scrollIntoView({ behavior: 'smooth' });
@@ -198,6 +241,7 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
           type: 'success',
           content: 'Opening self-introduction video modal...',
         };
+        skipRestoreFocusRef.current = true;
         onClose();
         if (onOpenVideo) {
           window.setTimeout(() => {
@@ -394,3 +438,4 @@ export const DeveloperConsole: React.FC<DeveloperConsoleProps> = ({
     </div>
   );
 };
+

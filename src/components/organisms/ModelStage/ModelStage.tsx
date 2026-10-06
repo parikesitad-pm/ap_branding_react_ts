@@ -13,7 +13,7 @@ import './ModelStage.css';
 // Lazy load 3D Canvas bundle to keep initial page bundle ultra-lean
 const ModelCanvas = lazy(() => import('./ModelCanvas'));
 
-export const ModelStage: React.FC<ModelStageProps> = ({ className = '' }) => {
+export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalStateChange }) => {
   const { t } = useLocale();
   const { isDark } = useTheme();
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -37,6 +37,10 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '' }) => {
   const [isCanvasReady, setIsCanvasReady] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasTriggeredMount, setHasTriggeredMount] = useState(false);
+
+  useEffect(() => {
+    onModalStateChange?.(isModalOpen);
+  }, [isModalOpen, onModalStateChange]);
 
   // DOM node references
   const sectionRef = useRef<HTMLElement | null>(null);

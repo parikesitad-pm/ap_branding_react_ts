@@ -114,3 +114,4 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     </div>
   );
 };
+

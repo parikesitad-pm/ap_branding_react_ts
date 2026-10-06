@@ -6,6 +6,23 @@
 - [x] F3 Horizontal Reel
 - [x] F4 ModelStage 3D
 - [x] F5 Disciplines + About + Contact + VideoModal + Polish
+- [x] F5.1 Debug / UX Hotfix
+- [ ] F6 Real Asset Integration
+
+## F5.1 Debug / UX Hotfix
+
+- Removed broken local font-face requests until real WOFF2 assets arrive.
+- Reel moved into normal block-flow pin context.
+- Reel horizontal motion slowed and pin duration extended.
+- Reel measurement uses actual viewport width.
+- Added globally discoverable `>_` developer-console trigger.
+- Added real CLI focus trap + focus restoration.
+- Build PASS.
+
+## Asumsi & Catatan F6
+
+- **Asset Gate Check**: Pemeriksaan direktori handoff `assets-src/` dan runtime `public/` (`models/`, `img/`, `fonts/`) mendeteksi belum adanya aset nyata Afrizal (hanya file `.gitkeep`).
+- **Status**: F6 BLOCKED — waiting for Afrizal assets. Sesuai Section 1 & Phase Gate, proses dihentikan tanpa membuat fake asset atau modifikasi data fiktif.
 
 ## Asumsi & Catatan F5
 
