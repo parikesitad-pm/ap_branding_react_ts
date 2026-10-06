@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+
+:root {
+  /* Brand Palette */
+  --cobalt: #2438FF;
+  --ink: #0A0C2B;
+  --flare: #FF5A2C;
+  --haze: #B9BCFF;
+  --chalk: #EEF0FA;
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* Animation */
+  --transition-fast: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Light Theme Variables */
+:root,
+html[data-theme="light"] {
+  --bg: var(--chalk);
+  --fg: var(--ink);
+  --muted: #454A7C;
+  --line: rgba(10, 12, 43, 0.2);
+  --panel-bg: rgba(10, 12, 43, 0.04);
+  --surface: #FFFFFF;
+}
+
+/* Dark Theme Variables */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A0C2B;
+    --fg: #EEF0FA;
+    --muted: #A9ADD8;
+    --line: rgba(238, 240, 250, 0.22);
+    --panel-bg: rgba(238, 240, 250, 0.06);
+    --surface: #141740;
+  }
+}
+
+html[data-theme="dark"] {
+  --bg: #0A0C2B;
+  --fg: #EEF0FA;
+  --muted: #A9ADD8;
+  --line: rgba(238, 240, 250, 0.22);
+  --panel-bg: rgba(238, 240, 250, 0.06);
+  --surface: #141740;
+}
