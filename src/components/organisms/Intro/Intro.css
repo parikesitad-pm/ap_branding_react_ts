@@ -33,19 +33,38 @@
   font-weight: 700;
   font-stretch: 85%;
   font-size: clamp(2rem, 4.8vw, 4.25rem);
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.015em;
-  color: var(--fg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15em 0.35em;
 }
 
-.intro-statement-line {
-  display: inline;
+.lando-word-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.05em 0.12em;
 }
 
-.intro-accent {
+.lando-highlight-box {
+  position: absolute;
+  inset: -0.06em -0.1em;
+  border-radius: 4px;
+  transform-origin: left center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lando-word-text {
+  position: relative;
+  z-index: 2;
+  color: rgba(238, 240, 250, 0.22);
+  transition: color 0.2s ease;
+}
+
+.lando-word-text.is-accent {
   color: var(--flare);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 
 .intro-secondary {

@@ -11,10 +11,36 @@
   border-radius: 999px;
   position: relative;
   user-select: none;
-  transition: background-color var(--transition-fast),
-              color var(--transition-fast),
-              border-color var(--transition-fast),
-              transform var(--transition-fast);
+  overflow: hidden;
+  z-index: 1;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background-color: var(--flare);
+  transform: translateY(105%);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn:hover:not(:disabled)::before {
+  transform: translateY(0%);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 90, 44, 0.28);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .btn:disabled {
@@ -34,6 +60,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn:hover:not(:disabled) .btn__icon {
+  transform: translate(3px, -3px);
 }
 
 /* Sizes */
@@ -55,17 +86,20 @@
   gap: 0.65rem;
 }
 
-/* Primary Variant: Bold solid Flare accent or Chalk/Cobalt */
+/* Primary Variant: Bold solid Flare accent */
 .btn--primary {
   background-color: var(--flare);
   color: #FFFFFF;
   border-color: var(--flare);
 }
 
-.btn--primary:hover:not(:disabled) {
+.btn--primary::before {
   background-color: #E6491E;
-  border-color: #E6491E;
+}
+
+.btn--primary:hover:not(:disabled) {
   color: #FFFFFF;
+  border-color: #E6491E;
 }
 
 /* Secondary Variant: Clean Chalk/Ink */
@@ -75,8 +109,11 @@
   border-color: var(--line);
 }
 
-.btn--secondary:hover:not(:disabled) {
+.btn--secondary::before {
   background-color: var(--flare);
+}
+
+.btn--secondary:hover:not(:disabled) {
   color: #FFFFFF;
   border-color: var(--flare);
 }
@@ -88,10 +125,13 @@
   border-color: var(--line);
 }
 
+.btn--ghost::before {
+  background-color: var(--panel-bg);
+}
+
 .btn--ghost:hover:not(:disabled) {
   border-color: var(--fg);
   color: var(--fg);
-  background-color: var(--panel-bg);
 }
 
 /* Focus */

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { gsap } from '../../../lib/gsap';
 import { useLocale } from '../../../hooks/useLocale';
 import './Intro.css';
@@ -6,7 +6,10 @@ import './Intro.css';
 export const Intro: React.FC = () => {
   const { t } = useLocale();
   const introRef = useRef<HTMLElement | null>(null);
-  const textRef = useRef<HTMLParagraphElement | null>(null);
+
+  const words = useMemo(() => {
+    return t.intro.statement.split(/\s+/).filter(Boolean);
+  }, [t.intro.statement]);
 
   useEffect(() => {
     const isReducedMotion =
@@ -21,32 +24,46 @@ export const Intro: React.FC = () => {
     }
 
     const ctx = gsap.context(() => {
-      // Split text or words reveal using ScrollTrigger
-      const lines = intro.querySelectorAll('.intro-statement-line');
-
-      gsap.fromTo(
-        lines,
-        {
-          yPercent: 60,
-          opacity: 0,
-        },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: 'power3.out',
+      const wordWraps = intro.querySelectorAll<HTMLElement>('.lando-word-wrap');
+      if (wordWraps.length) {
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: intro,
-            start: 'top 80%',
-            once: true,
+            start: 'top 75%',
+            end: 'bottom 45%',
+            scrub: 0.85,
           },
-        }
-      );
+        });
+
+        wordWraps.forEach((wrap, i) => {
+          const box = wrap.querySelector<HTMLElement>('.lando-highlight-box');
+          const text = wrap.querySelector<HTMLElement>('.lando-word-text');
+          if (!box || !text) return;
+
+          // 1. Box sweeps in across word, illuminates text
+          tl.fromTo(
+            box,
+            { scaleX: 0, opacity: 0 },
+            { scaleX: 1, opacity: 1, duration: 0.35, ease: 'power2.out' },
+            i === 0 ? '0' : '>-0.12'
+          )
+            .to(
+              text,
+              { color: '#EEF0FA', opacity: 1, duration: 0.2 },
+              '<'
+            )
+            // 2. Highlight box fades out, leaving illuminated text
+            .to(
+              box,
+              { opacity: 0, duration: 0.35, ease: 'power1.out' },
+              '>+0.05'
+            );
+        });
+      }
 
       gsap.fromTo(
         '.intro-secondary',
-        { opacity: 0, y: 20 },
+        { opacity: 0, y: 25 },
         {
           opacity: 1,
           y: 0,
@@ -54,7 +71,7 @@ export const Intro: React.FC = () => {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: intro,
-            start: 'top 65%',
+            start: 'top 60%',
             once: true,
           },
         }
@@ -64,26 +81,7 @@ export const Intro: React.FC = () => {
     return () => {
       ctx.revert();
     };
-  }, []);
-
-  // Highlight key phrase in statement
-  const renderHighlightedStatement = () => {
-    const full = t.intro.statement;
-    const highlight = t.intro.highlightPhrase;
-
-    if (!highlight || !full.includes(highlight)) {
-      return <span className="intro-statement-line">{full}</span>;
-    }
-
-    const parts = full.split(highlight);
-    return (
-      <>
-        <span className="intro-statement-line">{parts[0]}</span>
-        <span className="intro-statement-line intro-accent">{highlight}</span>
-        <span className="intro-statement-line">{parts.slice(1).join(highlight)}</span>
-      </>
-    );
-  };
+  }, [words]);
 
   return (
     <section ref={introRef} className="intro-section" aria-label="Manifesto">
@@ -92,9 +90,27 @@ export const Intro: React.FC = () => {
           <span className="intro-eyebrow-badge text-strobo">01 / MANIFESTO</span>
         </div>
 
-        <p ref={textRef} className="intro-statement">
-          {renderHighlightedStatement()}
-        </p>
+        <h2 className="intro-statement">
+          {words.map((word, idx) => {
+            const isHighlight =
+              t.intro.highlightPhrase &&
+              t.intro.highlightPhrase.toLowerCase().includes(word.toLowerCase().replace(/[^a-zA-Z]/g, ''));
+
+            return (
+              <span key={`${word}-${idx}`} className="lando-word-wrap">
+                <span
+                  className="lando-highlight-box"
+                  style={{
+                    backgroundColor: isHighlight ? 'var(--flare)' : 'rgba(36, 56, 255, 0.85)',
+                  }}
+                />
+                <span className={`lando-word-text ${isHighlight ? 'is-accent' : ''}`}>
+                  {word}
+                </span>
+              </span>
+            );
+          })}
+        </h2>
 
         <p className="intro-secondary">
           {t.intro.secondaryStatement}

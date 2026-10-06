@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Kinetic Disciplines Flying Ticker Segment
+   Cinematic alternating scroll-driven marquees
+   ========================================================================== */
+
+.kinetic-marquee-section {
+  position: relative;
+  width: 100%;
+  background-color: #0A0C2B;
+  color: #EEF0FA;
+  padding: clamp(3.5rem, 7vh, 6rem) 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(185, 188, 255, 0.12);
+  border-bottom: 1px solid rgba(185, 188, 255, 0.12);
+  user-select: none;
+}
+
+.kinetic-marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.2vw, 1.25rem);
+  width: 100%;
+}
+
+.kinetic-marquee-row {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kinetic-marquee-row:hover {
+  transform: scale(1.02);
+}
+
+.kinetic-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  will-change: transform;
+}
+
+.kinetic-marquee-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6.2vw, 5.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  transition: color 0.25s ease, -webkit-text-stroke-color 0.25s ease;
+}
+
+.kinetic-dot {
+  color: var(--flare);
+  margin: 0 0.5rem;
+}
+
+/* Row 1: Solid Chalk */
+.kinetic-row--1 .kinetic-marquee-text {
+  color: #EEF0FA;
+}
+.kinetic-row--1:hover .kinetic-marquee-text {
+  color: var(--flare);
+}
+
+/* Row 2: Outlined Haze Stroke */
+.kinetic-row--2 .kinetic-marquee-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(238, 240, 250, 0.35);
+}
+.kinetic-row--2:hover .kinetic-marquee-text {
+  color: #EEF0FA;
+  -webkit-text-stroke-color: #EEF0FA;
+}
+
+/* Row 3: Solid Chalk + Cobalt dot */
+.kinetic-row--3 .kinetic-marquee-text {
+  color: #EEF0FA;
+}
+.kinetic-row--3 .kinetic-dot {
+  color: #2438FF;
+}
+.kinetic-row--3:hover .kinetic-marquee-text {
+  color: #B9BCFF;
+}
+
+/* Row 4: Outlined Flare Stroke */
+.kinetic-row--4 .kinetic-marquee-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 90, 44, 0.5);
+}
+.kinetic-row--4:hover .kinetic-marquee-text {
+  color: var(--flare);
+  -webkit-text-stroke-color: var(--flare);
+}
+
+/* Row 5: Solid Chalk with Flare dot */
+.kinetic-row--5 .kinetic-marquee-text {
+  color: #EEF0FA;
+}
+.kinetic-row--5:hover .kinetic-marquee-text {
+  color: var(--flare);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-marquee-track {
+    transform: none !important;
+  }
+}
+

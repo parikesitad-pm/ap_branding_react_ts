@@ -11,6 +11,7 @@ import { WatchIntroSection, VideoModal } from '../components/organisms/VideoModa
 import { ContactFooter } from '../components/organisms/ContactFooter/ContactFooter';
 import { DeveloperConsole } from '../components/organisms/DeveloperConsole/DeveloperConsole';
 import { ConsoleTrigger } from '../components/atoms/ConsoleTrigger/ConsoleTrigger';
+import { KineticDisciplines } from '../components/organisms/KineticDisciplines/KineticDisciplines';
 import './Home.css';
 
 export const Home: React.FC = () => {
@@ -69,8 +70,11 @@ export const Home: React.FC = () => {
           {/* F2: Hero Section */}
           <Hero isReady={preloaderDone} />
 
-          {/* F2: Intro Statement */}
+          {/* F2: Intro Statement (with Lando Norris scroll highlight text) */}
           <Intro />
+
+          {/* Flying Kinetic Mediums Marquee (3D/CGI, Graphic, Motion, Photo, Film) */}
+          <KineticDisciplines />
 
           {/* F3: Selected Works / Horizontal Reel */}
           <Reel />
@@ -87,8 +91,8 @@ export const Home: React.FC = () => {
           {/* F5: Meet Afrizal — Self Introduction Video Facade */}
           <WatchIntroSection onOpenVideo={() => setIsVideoModalOpen(true)} />
 
-          {/* F5: Contact, Canonical Attribution, Developer CTA & CLI trigger */}
-          <ContactFooter onOpenConsole={() => setIsConsoleOpen(true)} />
+          {/* F5: Contact, Canonical Attribution, Developer CTA */}
+          <ContactFooter />
         </div>
       </PageLayout>
 

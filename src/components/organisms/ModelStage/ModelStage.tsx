@@ -251,7 +251,7 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
           </div>
 
           {/* Code-split WebGL Canvas */}
-          {hasTriggeredMount && (
+          {hasTriggeredMount && !isModalOpen && (
             <div
               className={`model-stage-canvas-wrap ${isCanvasReady ? 'is-ready' : ''}`}
               data-cursor="drag"

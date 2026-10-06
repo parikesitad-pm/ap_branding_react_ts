@@ -5,12 +5,10 @@ import { Button } from '../../atoms/Button/Button';
 import './ContactFooter.css';
 
 export interface ContactFooterProps {
-  onOpenConsole?: () => void;
   className?: string;
 }
 
 export const ContactFooter: React.FC<ContactFooterProps> = ({
-  onOpenConsole,
   className = '',
 }) => {
   const { t } = useLocale();
@@ -125,21 +123,8 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
               <span className="attribution-muted"> {t.contact.attributionSuffix}</span>
             </div>
 
-            {/* Developer CLI Easter Egg & Copyright */}
+            {/* Copyright Line */}
             <div className="footer-aux-group">
-              {onOpenConsole && (
-                <button
-                  type="button"
-                  className="cli-trigger-btn"
-                  onClick={onOpenConsole}
-                  aria-label={t.cli.openButton}
-                  title="Open developer console (Ctrl/⌘ + `)"
-                >
-                  <span className="cli-prompt-symbol">&gt;_</span>
-                  <span className="cli-trigger-text">{t.cli.openButton}</span>
-                </button>
-              )}
-
               <span className="copyright-line">{t.contact.rights}</span>
             </div>
           </div>

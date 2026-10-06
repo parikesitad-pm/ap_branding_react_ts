@@ -26,6 +26,15 @@
 - Added typewriter typing text effect (`useTypewriter` hook) with live stage status ticker and Hero role reveal.
 - Build PASS.
 
+## F5.2 UX & Visual Motion Polish
+
+- Removed duplicate Developer Console button in footer; preserved floating bottom-right trigger.
+- Cleaned browser console: inline SVG favicon data URI in `index.html` (fixes 404), switched ModelStage Drei `<Environment>` to native Three.js lights (fixes shader precision HLSL X4122 warning and WebGL context loss).
+- Added Lando Norris style dynamic button hover wipe fills, arrow shifts, and magnetic responses.
+- Implemented Lando Norris style word highlight box reveal and fade-out on scroll in Intro.
+- Added KineticDisciplines 5-row alternating flying marquee banner (3D/CGI, Graphic Design, Motion, Photography, Film) with ScrollTrigger scrub between Intro and Reel.
+- Build PASS.
+
 ## Asumsi & Catatan F6
 
 - **Asset Gate Check**: Pemeriksaan direktori handoff `assets-src/` dan runtime `public/` (`models/`, `img/`, `fonts/`) mendeteksi belum adanya aset nyata Afrizal (hanya file `.gitkeep`).

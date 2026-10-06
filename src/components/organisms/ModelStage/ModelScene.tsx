@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useThree } from '@react-three/fiber';
-import { OrbitControls, ContactShadows, Environment } from '@react-three/drei';
+import { OrbitControls, ContactShadows } from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { PlaceholderModel } from './PlaceholderModel';
 import type { ModelSceneProps } from './types';
@@ -85,6 +85,9 @@ export const ModelScene: React.FC<ModelSceneProps> = ({
     <>
       {/* Editorial lighting scheme: key, rim, and brand accent fill */}
       <ambientLight intensity={isDark ? 0.9 : 1.25} />
+      <hemisphereLight
+        args={[isDark ? '#2438ff' : '#ffffff', isDark ? '#0a0c2b' : '#cbd7e8', isDark ? 0.8 : 0.6]}
+      />
       <directionalLight
         position={[4, 7, 5]}
         intensity={isDark ? 2.4 : 1.9}
@@ -103,9 +106,7 @@ export const ModelScene: React.FC<ModelSceneProps> = ({
         angle={0.6}
         penumbra={0.8}
       />
-
-      {/* TODO: replace temporary environment with local optimized HDRI if the final asset requires it */}
-      <Environment preset="studio" />
+      <pointLight position={[3, -2, 2]} intensity={isDark ? 1.2 : 0.8} color="#ff5a2c" />
 
       {/* Core 3D model node (Procedural placeholder during F4, GLB architecture-ready) */}
       <PlaceholderModel
