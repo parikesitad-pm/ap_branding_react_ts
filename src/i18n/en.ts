@@ -26,6 +26,7 @@ export const en: TranslationSchema = {
   preloader: {
     loading: 'LOADING VISUAL WORLD',
     status: 'Loading portfolio',
+    ready: 'Portfolio ready',
   },
   intro: {
     statement: 'Posters to look at, models to turn around, loops that move, films to press play on, and photographs that hold still.',

@@ -26,6 +26,7 @@ export const ja: TranslationSchema = {
   preloader: {
     loading: '視覚世界を読み込み中',
     status: 'ポートフォリオ読み込み中',
+    ready: 'ポートフォリオの準備ができました',
   },
   intro: {
     statement: '見つめるポスター、全方位から回せる3Dモデル、滑らかなループ、再生される映像、そして静止する写真。',

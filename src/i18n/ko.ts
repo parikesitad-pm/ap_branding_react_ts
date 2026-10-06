@@ -26,6 +26,7 @@ export const ko: TranslationSchema = {
   preloader: {
     loading: '시각 공간 로딩 중',
     status: '포트폴리오 불러오는 중',
+    ready: '포트폴리오 준비 완료',
   },
   intro: {
     statement: '응시하는 포스터, 입체적으로 회전하는 모델, 유려한 루프, 재생되는 영상, 그리고 정지된 순간의 사진.',

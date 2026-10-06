@@ -37,14 +37,14 @@
   letter-spacing: -0.015em;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.15em 0.35em;
+  gap: 0.15em 0.28em;
 }
 
 .lando-word-wrap {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.05em 0.12em;
+  padding: 0.05em 0;
 }
 
 .lando-highlight-box {
@@ -52,6 +52,8 @@
   inset: -0.06em -0.1em;
   border-radius: 4px;
   transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
   z-index: 1;
   pointer-events: none;
 }
@@ -59,8 +61,9 @@
 .lando-word-text {
   position: relative;
   z-index: 2;
-  color: rgba(238, 240, 250, 0.22);
-  transition: color 0.2s ease;
+  display: inline-block;
+  color: var(--fg);
+  opacity: 0.22;
 }
 
 .lando-word-text.is-accent {
@@ -85,4 +88,21 @@
     max-width: 100%;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .lando-word-text {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .lando-highlight-box {
+    display: none !important;
+  }
+
+  .intro-secondary {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 

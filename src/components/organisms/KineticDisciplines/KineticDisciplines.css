@@ -37,10 +37,23 @@
 }
 
 .kinetic-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.kinetic-marquee-set {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-right: clamp(1.5rem, 3vw, 3rem);
+}
+
+.kinetic-marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  will-change: transform;
+  white-space: nowrap;
 }
 
 .kinetic-marquee-text {
@@ -55,7 +68,7 @@
 
 .kinetic-dot {
   color: var(--flare);
-  margin: 0 0.5rem;
+  margin-right: clamp(0.5rem, 1vw, 1rem);
 }
 
 /* Row 1: Solid Chalk */
@@ -109,5 +122,10 @@
   .kinetic-marquee-track {
     transform: none !important;
   }
+
+  .kinetic-marquee-set[aria-hidden="true"] {
+    display: none;
+  }
 }
+
 

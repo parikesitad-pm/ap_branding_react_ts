@@ -127,3 +127,34 @@
 - **Reduced-motion fallback**: Pengguna dengan preferensi `prefers-reduced-motion: reduce` menerima layout native horizontal scroll tanpa pin atau transform animation, menjaga kenyamanan dan aksesibilitas penuh.
 - **Placeholder asset status**: Menampilkan 8 proyek placeholder terstruktur dengan asymmetric aspect ratio (`portrait`, `tall`, `landscape`, `wide`, `square`) dan editorial stagger alignment (`up`, `down`, `center`). Media container menggunakan wireframe SVG geometris dan label literal (`[3D MODEL PLACEHOLDER]`, `[PROJECT POSTER]`, dll.) tanpa artwork fiktif. Kartu 3D diutamakan dengan border Flare dan visual depth tanpa Three.js Canvas. Panel editorial Start, Process Note, dan Closing terintegrasi rapi di dalam rail.
 - Build production lolos verifikasi (`npm run build`).
+
+## Sprint 7 — Intro Autoplay
+
+- Replaced Intro scroll-scrub reveal with a one-shot viewport-triggered GSAP timeline.
+- Removed scrub dependency and retained normal document flow with no pin.
+- Preserved accent styling by animating opacity/transform instead of universal text color.
+- Tightened inter-word spacing without changing typography.
+- Reduced-motion renders the final readable state immediately.
+- Limitation note on CJK: Locales without standard whitespace delimiters (JA, ZH) animate the manifesto sentence as a single unit without artificial word breaking or Intl.Segmenter dependencies.
+
+## Sprint 8 — Kinetic Disciplines Marquee
+
+- Replaced scroll-scrubbed row translation with autonomous GSAP marquee loops.
+- Added duplicated equal-width sets for seamless looping.
+- Preserved alternating direction and slightly varied row speeds.
+- Added offscreen pause/resume via IntersectionObserver.
+- Deferred scroll-based timeScale boost for stability.
+- Reduced-motion renders the marquee as static readable discipline rows.
+
+## Sprint 9 — Honeycomb Preloader
+
+- Replaced hardcoded 0→75→100 loading with typed weighted readiness tasks.
+- Added future-ready asset manifest gated by explicit `assetStatus: 'ready'`; current placeholders are never fetched.
+- Kept GLB binaries and ModelCanvas deferred to preserve F4 lazy loading.
+- Added per-task watchdogs and a global safety ceiling so stalled requests cannot brick the site.
+- Gated underlying interaction and Lenis until the loader exits, then refreshed ScrollTrigger once.
+- Added deterministic SVG-surface honeycomb cells on 3D-transformable HTML wrappers with center-out fracture reveal.
+- Reduced-motion still waits for readiness but exits with a short simple transition.
+
+
+
