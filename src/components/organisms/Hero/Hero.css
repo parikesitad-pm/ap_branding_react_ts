@@ -1,0 +1,278 @@
+.hero-section {
+  position: relative;
+  background-color: var(--cobalt);
+  color: var(--chalk);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--pad) + 1rem) var(--pad) var(--pad);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Eyebrow Positioning */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--haze);
+}
+
+.hero-eyebrow__badge {
+  background: rgba(10, 12, 43, 0.3);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(238, 240, 250, 0.2);
+}
+
+.hero-eyebrow__title {
+  color: var(--chalk);
+}
+
+/* Headline & Name Wrap */
+.hero-headline-wrap {
+  position: relative;
+  margin: auto 0 2rem;
+  padding: 2rem 0;
+}
+
+.hero-name-massive {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 75%;
+  font-size: clamp(3.5rem, 16vw, 19rem);
+  line-height: 0.85;
+  letter-spacing: -0.025em;
+  color: var(--chalk);
+  user-select: none;
+}
+
+.hero-line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.hero-line {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Orange Scribble */
+.hero-scribble {
+  width: 13vw;
+  min-width: 4.5rem;
+  height: auto;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.hero-scribble path {
+  fill: none;
+  stroke: var(--flare);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+/* 3D Geometry Territory Placeholder */
+.hero-3d-territory {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: clamp(140px, 20vw, 280px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-orbital-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px dashed rgba(238, 240, 250, 0.35);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orbitalSpin 30s linear infinite;
+}
+
+.hero-orbital-axis {
+  position: absolute;
+  width: 120%;
+  height: 40%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 90, 44, 0.45);
+  transform: rotate(-25deg);
+}
+
+.hero-orbital-core {
+  width: 24%;
+  height: 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FF9A78 0%, #FF5A2C 60%, #A32A0C 100%);
+  box-shadow: 0 0 30px rgba(255, 90, 44, 0.4);
+}
+
+@keyframes orbitalSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-3d-tag {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--haze);
+  margin-top: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Lower Section: Disciplines and Scroll Cue */
+.hero-footer-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(238, 240, 250, 0.2);
+}
+
+.hero-disciplines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 48ch;
+}
+
+.disciplines-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--chalk);
+}
+
+.disciplines-divider {
+  color: var(--haze);
+}
+
+.disciplines-text {
+  color: var(--haze);
+}
+
+.hero-role {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--chalk);
+  opacity: 0.9;
+}
+
+.hero-scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  user-select: none;
+}
+
+.scroll-cue__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: rgba(238, 240, 250, 0.15);
+  animation: cueBounce 2s ease-in-out infinite;
+}
+
+@keyframes cueBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-3d-territory {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 1.5rem;
+    width: 120px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: calc(var(--pad) + 0.5rem) var(--pad) var(--pad);
+  }
+
+  .hero-line {
+    white-space: normal;
+  }
+
+  .hero-scribble {
+    width: 22vw;
+    min-width: 3.5rem;
+  }
+
+  .hero-footer-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbital-ring {
+    animation: none;
+  }
+
+  .scroll-cue__icon {
+    animation: none;
+  }
+
+  .hero-scribble path {
+    stroke-dashoffset: 0 !important;
+  }
+}

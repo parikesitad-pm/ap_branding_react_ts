@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import { gsap, ScrollTrigger } from '../lib/gsap';
 
 interface UseLenisOptions {
   enabled?: boolean;
@@ -25,15 +26,19 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
 
     lenisRef.current = lenis;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Connect Lenis to ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
-    const rafId = requestAnimationFrame(raf);
+    // Synchronize via GSAP ticker
+    const tickerUpdate = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickerUpdate);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tickerUpdate);
       lenis.destroy();
       lenisRef.current = null;
     };
@@ -41,4 +46,3 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
 
   return lenisRef;
 }
-

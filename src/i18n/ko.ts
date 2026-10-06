@@ -15,11 +15,22 @@ export const ko: TranslationSchema = {
     photo: '사진',
   },
   hero: {
+    eyebrow: '다학제 시각 디자이너',
+    firstName: 'Afrizal',
+    lastName: 'Pramudyan',
     roleLine: '그래픽 디자이너, 3D 모델러, 애니메이터, 포토그래퍼, 비디오그래퍼.',
-    scrollHint: '계속 스크롤하세요. 작품이 가로 방향으로 펼쳐집니다.',
+    disciplinesLine: '3D / CGI · 그래픽 디자인 · 모션 · 사진 · 영상',
+    scrollHint: '스크롤하여 탐색',
+    pending3D: '[3D 에셋 준비 중]',
+  },
+  preloader: {
+    loading: '비주얼 월드 로딩 중',
+    status: '포트폴리오 로딩 중',
   },
   intro: {
     statement: '바라보는 포스터, 회전하는 3D 모델, 흐르는 루프, 재생되는 영상, 그리고 정지된 사진.',
+    highlightPhrase: '회전하는 3D 모델',
+    secondaryStatement: '하나의 매체에 머무르지 않습니다. 아이디어로 이야기합니다.',
   },
   reel: {
     title: '주요 작품',
@@ -93,5 +104,7 @@ export const ko: TranslationSchema = {
     placeholderNotice: '포트폴리오 에셋 준비 중입니다. 공식 작품이 업데이트될 예정입니다.',
     viewWork: '작품 보기',
     startProject: '프로젝트 시작하기',
+    comingNext: 'F3 단계에서 공개 예정',
+    selectedWorksPlaceholder: '선정작 가로 레일 (F3)',
   },
 };

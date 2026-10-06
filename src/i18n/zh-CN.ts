@@ -15,11 +15,22 @@ export const zhCN: TranslationSchema = {
     photo: '静态摄影',
   },
   hero: {
+    eyebrow: '跨领域视觉设计师',
+    firstName: 'Afrizal',
+    lastName: 'Pramudyan',
     roleLine: '平面设计师、3D建模师、动画师、摄影师与摄像师。',
-    scrollHint: '继续向下滚动。作品将横向展开。',
+    disciplinesLine: '3D / CGI · 平面设计 · 动态设计 · 静态摄影 · 影视',
+    scrollHint: '向下滚动探索',
+    pending3D: '[3D 资产准备中]',
+  },
+  preloader: {
+    loading: '视觉世界加载中',
+    status: '加载作品集',
   },
   intro: {
     statement: '凝视的海报、旋转的模型、流动的循环、播放的影片，以及定格的照片。',
+    highlightPhrase: '旋转的模型',
+    secondaryStatement: '我不拘泥于单一媒介。我与创意灵感同行。',
   },
   reel: {
     title: '精选作品',
@@ -93,5 +104,7 @@ export const zhCN: TranslationSchema = {
     placeholderNotice: '作品集素材正在整理准备中，官方作品即将更新。',
     viewWork: '浏览作品',
     startProject: '发起项目',
+    comingNext: '即将在 F3 阶段上线',
+    selectedWorksPlaceholder: '精选作品横向长廊 (F3)',
   },
 };

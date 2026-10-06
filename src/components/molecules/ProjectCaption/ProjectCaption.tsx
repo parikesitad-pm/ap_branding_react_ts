@@ -48,3 +48,4 @@ export const ProjectCaption: React.FC<ProjectCaptionProps> = ({
     </div>
   );
 };
+

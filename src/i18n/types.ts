@@ -15,11 +15,22 @@ export interface TranslationSchema {
     photo: string;
   };
   hero: {
+    eyebrow: string;
+    firstName: string;
+    lastName: string;
     roleLine: string;
+    disciplinesLine: string;
     scrollHint: string;
+    pending3D: string;
+  };
+  preloader: {
+    loading: string;
+    status: string;
   };
   intro: {
     statement: string;
+    highlightPhrase: string;
+    secondaryStatement: string;
   };
   reel: {
     title: string;
@@ -93,5 +104,7 @@ export interface TranslationSchema {
     placeholderNotice: string;
     viewWork: string;
     startProject: string;
+    comingNext: string;
+    selectedWorksPlaceholder: string;
   };
 }

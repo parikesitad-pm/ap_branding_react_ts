@@ -15,11 +15,22 @@ export const ja: TranslationSchema = {
     photo: '写真',
   },
   hero: {
+    eyebrow: 'マルチディシプリナリー・ビジュアルデザイナー',
+    firstName: 'Afrizal',
+    lastName: 'Pramudyan',
     roleLine: 'グラフィックデザイナー、3Dモデラー、アニメーター、写真家、ビデオグラファー。',
-    scrollHint: 'スクロールを続けてください。作品が横方向に展開します。',
+    disciplinesLine: '3D / CGI · グラフィックデザイン · モーション · 写真 · 映像',
+    scrollHint: 'スクロールして探索',
+    pending3D: '[3D アセット準備中]',
+  },
+  preloader: {
+    loading: 'ビジュアルワールドを読み込み中',
+    status: 'ポートフォリオを読み込み中',
   },
   intro: {
     statement: '見つめるポスター、向きを変える3Dモデル、動き続けるループ、再生される映像、そして静止する写真。',
+    highlightPhrase: '向きを変える3Dモデル',
+    secondaryStatement: '私は一つの媒体に囚われません。アイデアと共に形作ります。',
   },
   reel: {
     title: '厳選された作品',
@@ -93,5 +104,7 @@ export const ja: TranslationSchema = {
     placeholderNotice: 'ポートフォリオ素材は準備中です。公式作品は順次更新されます。',
     viewWork: '作品を見る',
     startProject: 'プロジェクトを開始',
+    comingNext: 'F3フェーズで公開予定',
+    selectedWorksPlaceholder: '選抜作品横スクロールレール (F3)',
   },
 };

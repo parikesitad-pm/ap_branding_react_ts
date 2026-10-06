@@ -7,10 +7,14 @@ import { useLocale } from '../../../hooks/useLocale';
 import './Header.css';
 
 export interface HeaderProps {
+  variant?: 'default' | 'hero';
   className?: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ className = '' }) => {
+export const Header: React.FC<HeaderProps> = ({
+  variant = 'default',
+  className = '',
+}) => {
   const { t } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,7 +27,10 @@ export const Header: React.FC<HeaderProps> = ({ className = '' }) => {
   };
 
   return (
-    <header className={`site-header ${className}`} role="banner">
+    <header
+      className={`site-header site-header--${variant} ${className}`}
+      role="banner"
+    >
       <div className="site-header__inner">
         {/* Brand Mark */}
         <a href="#top" className="site-header__brand" aria-label="Afrizal Pramudyan">

@@ -2,7 +2,7 @@
 
 - [x] F0 Foundation
 - [x] F1 Atoms & Molecules
-- [ ] F2 Hero + Intro + Preloader
+- [x] F2 Hero + Intro + Preloader
 - [ ] F3 Horizontal Reel
 - [ ] F4 ModelStage 3D
 - [ ] F5 Disciplines + About + Contact + VideoModal + Polish
@@ -24,6 +24,15 @@
 - Button dibuat polymorphic (`<button>` / `<a>`) dengan class hooks `.magnetic-wrap` & `.magnetic-inner` untuk integrasi magnetic motion F5 tanpa rewrite.
 - I18n sinkron di 4 bahasa (`en`, `zh-CN`, `ja`, `ko`) untuk kategori proyek (`all`, `graphic`, `3d`, `animation`, `photo`) dan label aksesibilitas.
 - Integrasi showcase komponen di `Home.tsx` memverifikasi seluruh komponen aktif dan lolos typecheck tanpa dead-code.
+- Build production lolos verifikasi (`npm run build`).
+
+## Asumsi & Catatan F2
+
+- **Preloader approach**: Menggunakan counter terukur (000 → 100) berbasis kesiapan nyata DOM dan `document.fonts.ready` dengan minimum duration 900ms agar transisi tidak flicker, diakhiri cinematic vertical `clip-path` reveal (`inset(0 0 100% 0)`).
+- **Hero GSAP timeline**: Menggunakan `gsap.context()` dengan cleanup `ctx.revert()`. Urutan animasi terorkestrasi: eyebrow fade up → headline reveal via overflow mask (`yPercent: 110 → 0`) → orange SVG scribble vector drawing (`strokeDashoffset: 1 → 0`) → role & disciplines reveal → scroll hint fade → decorative 3D geometry entrance. Ditambahkan scroll parallax halus pada headline dan geometry via ScrollTrigger.
+- **Lenis integration**: Sinkronisasi Lenis dengan `ScrollTrigger.update` dan GSAP ticker (`gsap.ticker.add`) pada single instance di `useLenis.ts`.
+- **Reduced-motion behavior**: Branch `prefers-reduced-motion: reduce` diaktifkan di Preloader (instan complete), Hero (langsung tampil di final state tanpa parallax/stroke drawing), dan Intro (line reveal instan).
+- **Placeholder asset status**: Hero menyisakan area khusus untuk 3D ModelStage berupa lightweight SVG/CSS orbital geometry dengan label subtle `[3D ASSET PENDING]`, tanpa Canvas Three.js hingga fase F4. Temporary boundary section disiapkan untuk `#work` (F3 Selected Works).
 - Build production lolos verifikasi (`npm run build`).
 
 ## Specifications for Future Phases

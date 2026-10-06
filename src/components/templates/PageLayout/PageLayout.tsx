@@ -5,15 +5,19 @@ import './PageLayout.css';
 
 export interface PageLayoutProps {
   children: React.ReactNode;
+  headerVariant?: 'default' | 'hero';
 }
 
-export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
-  // Initialize Lenis smooth scroll
+export const PageLayout: React.FC<PageLayoutProps> = ({
+  children,
+  headerVariant = 'hero',
+}) => {
+  // Initialize Lenis smooth scroll synchronized with GSAP ticker & ScrollTrigger
   useLenis();
 
   return (
     <div className="page-layout">
-      <Header />
+      <Header variant={headerVariant} />
       <main className="page-main" id="main-content">
         {children}
       </main>

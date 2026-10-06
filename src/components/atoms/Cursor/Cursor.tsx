@@ -32,3 +32,4 @@ export const Cursor: React.FC<CursorProps> = ({
     </div>
   );
 };
+

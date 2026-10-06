@@ -15,11 +15,22 @@ export const en: TranslationSchema = {
     photo: 'Photography',
   },
   hero: {
+    eyebrow: 'Multidisciplinary Visual Designer',
+    firstName: 'Afrizal',
+    lastName: 'Pramudyan',
     roleLine: 'Graphic designer, 3D modeler, animator, photographer, and videographer.',
-    scrollHint: 'Keep scrolling. The work moves sideways.',
+    disciplinesLine: '3D / CGI · GRAPHIC DESIGN · MOTION · PHOTOGRAPHY · FILM',
+    scrollHint: 'Scroll to explore',
+    pending3D: '[3D ASSET PENDING]',
+  },
+  preloader: {
+    loading: 'LOADING VISUAL WORLD',
+    status: 'Loading portfolio',
   },
   intro: {
     statement: 'Posters to look at, models to turn around, loops that move, films to press play on, and photographs that hold still.',
+    highlightPhrase: 'models to turn around',
+    secondaryStatement: "I don't work in one medium. I work with ideas.",
   },
   reel: {
     title: 'Selected work',
@@ -93,5 +104,7 @@ export const en: TranslationSchema = {
     placeholderNotice: 'Portfolio assets currently in staging. Official works will be updated.',
     viewWork: 'View work',
     startProject: 'Start a project',
+    comingNext: 'Coming next in F3',
+    selectedWorksPlaceholder: 'Selected Works Rail — Horizontal Gallery (F3)',
   },
 };
