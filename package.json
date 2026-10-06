@@ -1,7 +1,14 @@
 {
   "name": "ap_branding_react_ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Portfolio of Afrizal Pramudyan — 3D Artist & Multidisciplinary Visual Designer",
+  "author": "parikesitad-pm (https://github.com/parikesitad-pm)",
+  "homepage": "https://ap-branding-react-ts.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parikesitad-pm/ap_branding_react_ts.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

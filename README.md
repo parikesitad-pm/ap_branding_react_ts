@@ -2,6 +2,23 @@
 
 Frontend-only static portfolio & landing page for **Afrizal Pramudyan**, multidisciplinary visual designer with a core focus on **3D modeling / CGI**, graphic design, animation/motion, photography, and videography.
 
+```text
+/**
+ * Afrizal Pramudyan Portfolio
+ *
+ * crafted with <3 by parikesitad-pm
+ * https://github.com/parikesitad-pm
+ *
+ * a MODULA project
+ */
+```
+
+---
+
+## Authorship & Attribution
+
+crafted by [parikesitad-pm](https://github.com/parikesitad-pm) for **Afrizal Pramudyan** — a **MODULA project**.
+
 ---
 
 ## Tech Stack
@@ -68,4 +85,6 @@ node scripts/optimize-images.mjs
 ## Production Deployment
 
 This project deploys to **Vercel** with pure static output (`dist/`).
-Configuration and environment variables are documented in `.env.example`.
+- **Live URL**: [https://ap-branding-react-ts.vercel.app](https://ap-branding-react-ts.vercel.app)
+- **Repository**: [https://github.com/parikesitad-pm/ap_branding_react_ts](https://github.com/parikesitad-pm/ap_branding_react_ts)
+- Configuration and environment variables are documented in `.env.example`.

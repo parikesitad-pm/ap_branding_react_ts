@@ -1,3 +1,12 @@
+/**
+ * Afrizal Pramudyan Portfolio
+ *
+ * crafted with <3 by parikesitad-pm
+ * https://github.com/parikesitad-pm
+ *
+ * a MODULA project
+ */
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/tokens.css';

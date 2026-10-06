@@ -85,6 +85,37 @@ export const Home: React.FC = () => {
               ))}
             </div>
           </div>
+
+          {/* Canonical Creator Attribution & Subtle Developer CTA */}
+          <div className="footer-attribution-section">
+            <div className="attribution-colophon">
+              <span>crafted by </span>
+              <a
+                href="https://github.com/parikesitad-pm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="attribution-link"
+              >
+                parikesitad-pm
+              </a>
+              <span> for Afrizal Pramudyan — a MODULA project</span>
+            </div>
+
+            <aside className="developer-cta">
+              <span className="developer-cta-lead">Need your own profile page?</span>
+              <span className="developer-cta-types">
+                Personal site · Online Business Card · Personal Branding
+              </span>
+              <a
+                href="https://wa.me/6282298503412"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="developer-cta-link"
+              >
+                Let&apos;s build yours &rarr;
+              </a>
+            </aside>
+          </div>
         </footer>
       </div>
     </PageLayout>
