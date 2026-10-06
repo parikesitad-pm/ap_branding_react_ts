@@ -101,5 +101,77 @@ select:focus-visible {
   html {
     scroll-behavior: auto;
   }
+  .text-strobo,
+  .text-strobo-glitch,
+  .typing-cursor {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   Kinetic Strobo & Typing Effect Utilities
+   ========================================================================== */
+
+@keyframes stroboFlicker {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  6% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 10px var(--flare));
+  }
+  10% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  38% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 14px var(--cobalt));
+  }
+  42% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  74% {
+    opacity: 0.45;
+    filter: drop-shadow(0 0 8px var(--flare));
+  }
+  78% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+.text-strobo {
+  display: inline-block;
+  animation: stroboFlicker 4.8s steps(1, end) infinite;
+}
+
+@keyframes stroboGlitchColor {
+  0%, 100% { color: inherit; }
+  15% { color: var(--flare); text-shadow: 2px 0 var(--cobalt); }
+  18% { color: inherit; text-shadow: none; }
+  62% { color: var(--cobalt); text-shadow: -2px 0 var(--flare); }
+  65% { color: inherit; text-shadow: none; }
+}
+
+.text-strobo-glitch {
+  display: inline-block;
+  animation: stroboGlitchColor 3.6s steps(1, end) infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  color: var(--flare);
+  margin-left: 2px;
+  animation: blinkCursor 0.8s infinite;
+  font-weight: 400;
+  user-select: none;
 }
 

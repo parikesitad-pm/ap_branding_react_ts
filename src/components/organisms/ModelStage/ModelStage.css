@@ -8,13 +8,13 @@
   width: 100%;
   background-color: var(--bg-primary, #090a0f);
   color: var(--text-primary, #f5f6f9);
-  overflow: clip;
 }
 
-/* Desktop height managed by ScrollTrigger pin spacer */
+/* Desktop height for ScrollTrigger pinning context */
 @media (min-width: 769px) {
   .model-stage-section {
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 600px;
   }
 }
 
@@ -52,6 +52,17 @@
   overflow: hidden;
 }
 
+@keyframes stageBreathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.18);
+    opacity: 1;
+  }
+}
+
 .stage-ambient-glow {
   position: absolute;
   top: 30%;
@@ -67,6 +78,7 @@
     transparent 70%
   );
   filter: blur(60px);
+  animation: stageBreathe 8s ease-in-out infinite;
 }
 
 .stage-watermark-num {
@@ -112,6 +124,21 @@
   font-size: clamp(1.25rem, 2.5vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.stage-live-ticker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--brand-flare, #ff3d00);
+  margin-top: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.stage-live-text {
+  font-weight: 700;
   text-transform: uppercase;
 }
 

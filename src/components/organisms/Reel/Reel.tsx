@@ -30,7 +30,7 @@ export const Reel: React.FC = () => {
     return projects.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
-  // Calculate nearest project card based on horizontal position
+  // Calculate nearest project card based on horizontal position & apply depth zoom
   const updateActiveIndexFromTrack = useCallback(() => {
     const track = trackRef.current;
     const viewport = viewportRef.current;
@@ -45,10 +45,28 @@ export const Reel: React.FC = () => {
     let closestIndex = 1;
     let minDiff = Infinity;
 
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     cards.forEach((card) => {
       const rect = card.getBoundingClientRect();
       const cardCenter = rect.left + rect.width / 2;
       const diff = Math.abs(cardCenter - viewportCenter);
+
+      // Depth Zoom-in (center) & Zoom-out (periphery)
+      if (!prefersReduced && window.innerWidth >= 768) {
+        const maxDist = window.innerWidth * 0.72;
+        const norm = Math.min(1, diff / maxDist);
+        const scale = 1.04 - norm * 0.1;
+        const opacity = 1.0 - norm * 0.22;
+        const inner = card.querySelector<HTMLElement>('.reel-card__inner');
+        if (inner) {
+          inner.style.transform = `scale(${scale.toFixed(3)})`;
+          inner.style.opacity = opacity.toFixed(3);
+        }
+      }
+
       if (diff < minDiff) {
         minDiff = diff;
         const idx = parseInt(card.dataset.index || '1', 10);
@@ -138,6 +156,8 @@ export const Reel: React.FC = () => {
 
         // 3. Chapter exit delay / completion buffer (pause before unpinning to 3D)
         tl.to({}, { duration: 0.18 });
+
+        ScrollTrigger.sort();
       }, sectionRef);
     }, 50);
 

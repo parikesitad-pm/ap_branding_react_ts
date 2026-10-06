@@ -163,6 +163,11 @@
   align-items: center;
   justify-content: center;
   height: 54px;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.discipline-row:hover .discipline-col-visual {
+  transform: scale(1.18);
 }
 
 /* 1. Graphic Design: layered typographic grid */

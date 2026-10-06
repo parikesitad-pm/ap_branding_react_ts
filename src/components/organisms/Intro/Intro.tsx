@@ -88,6 +88,10 @@ export const Intro: React.FC = () => {
   return (
     <section ref={introRef} className="intro-section" aria-label="Manifesto">
       <div className="intro-container">
+        <div className="intro-eyebrow-row">
+          <span className="intro-eyebrow-badge text-strobo">01 / MANIFESTO</span>
+        </div>
+
         <p ref={textRef} className="intro-statement">
           {renderHighlightedStatement()}
         </p>

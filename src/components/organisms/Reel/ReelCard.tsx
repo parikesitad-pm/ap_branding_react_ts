@@ -126,7 +126,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ project, index }) => {
                 <span className="reel-card__placeholder-badge">
                   {project.caption || project.title}
                 </span>
-                <span className="reel-card__placeholder-type">
+                <span className="reel-card__placeholder-type text-strobo-glitch">
                   {is3D ? 'GLB POSTER PREVIEW' : `${project.category.toUpperCase()} ASSET PENDING`}
                 </span>
               </div>

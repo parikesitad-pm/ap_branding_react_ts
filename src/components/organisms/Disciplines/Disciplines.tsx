@@ -71,7 +71,7 @@ export const Disciplines: React.FC<DisciplinesProps> = ({ className = '' }) => {
         {/* Section Header */}
         <header className="disciplines-header">
           <div className="disciplines-eyebrow-wrap">
-            <span className="disciplines-index">04 / PRACTICE</span>
+            <span className="disciplines-index text-strobo">04 / PRACTICE</span>
             <h2 id="disciplines-heading" className="disciplines-title">
               {t.disciplines.title}
             </h2>

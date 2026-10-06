@@ -3,6 +3,7 @@ import { useLocale } from '../../../hooks/useLocale';
 import { useTheme } from '../../../hooks/useTheme';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useInView } from '../../../hooks/useInView';
+import { useTypewriter } from '../../../hooks/useTypewriter';
 import { projects } from '../../../data/projects';
 import { gsap, ScrollTrigger } from '../../../lib/gsap';
 import { ModelErrorBoundary } from './ModelErrorBoundary';
@@ -32,6 +33,21 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
   const [activeStageMode, setActiveStageMode] = useState<StageMode>('final');
   const currentStageModeRef = useRef<StageMode>('final');
   const stageProgressRef = useRef<number>(0);
+
+  // Typewriter live ticker for current 3D stage mode
+  const stageStatusLabel = useMemo(() => {
+    switch (activeStageMode) {
+      case 'wireframe':
+        return 'MODE // 03 · WIREFRAME MATRIX GEOMETRY';
+      case 'shaded':
+        return 'MODE // 02 · SHADED CLAY VOLUME';
+      case 'final':
+      default:
+        return 'MODE // 01 · FINAL METALLIC LIGHTING';
+    }
+  }, [activeStageMode]);
+
+  const typedStageLabel = useTypewriter(stageStatusLabel, 26, 40);
 
   // Canvas readiness & modal states
   const [isCanvasReady, setIsCanvasReady] = useState(false);
@@ -84,46 +100,53 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
   // GSAP ScrollTrigger desktop pinning and scrubbing
   useEffect(() => {
     const section = sectionRef.current;
-    const shell = shellRef.current;
-    if (!section || !shell || isMobile || reducedMotion) return;
+    if (!section || isMobile || reducedMotion) return;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: '+=260%',
-        pin: shell,
-        pinSpacing: true,
-        anticipatePin: 1,
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const progress = self.progress;
+    let ctx: gsap.Context | null = null;
+    const timer = setTimeout(() => {
+      ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          id: 'model-stage-pin',
+          trigger: section,
+          start: 'top top',
+          end: '+=250%',
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          scrub: 1.2,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
 
-          // Normalize shader transition with chapter entry & exit pause plateaus
-          // 0.00 -> 0.14: Chapter entry delay (settles firmly on FINAL state)
-          // 0.14 -> 0.86: Progressive scrub between shaders
-          // 0.86 -> 1.00: Chapter exit buffer delay (settles firmly on WIREFRAME state)
-          const shaderProgress = Math.max(0, Math.min(1, (progress - 0.14) / 0.72));
-          stageProgressRef.current = shaderProgress;
+            // Normalize shader transition with chapter entry & exit pause plateaus
+            // 0.00 -> 0.14: Chapter entry delay (settles firmly on FINAL state)
+            // 0.14 -> 0.86: Progressive scrub between shaders
+            // 0.86 -> 1.00: Chapter exit buffer delay (settles firmly on WIREFRAME state)
+            const shaderProgress = Math.max(0, Math.min(1, (progress - 0.14) / 0.72));
+            stageProgressRef.current = shaderProgress;
 
-          // Determine stage state based on threshold intervals with comfortable plateaus
-          let mode: StageMode = 'final';
-          if (progress >= 0.72) {
-            mode = 'wireframe';
-          } else if (progress >= 0.35) {
-            mode = 'shaded';
-          }
+            // Determine stage state based on threshold intervals with comfortable plateaus
+            let mode: StageMode = 'final';
+            if (progress >= 0.72) {
+              mode = 'wireframe';
+            } else if (progress >= 0.35) {
+              mode = 'shaded';
+            }
 
-          if (mode !== currentStageModeRef.current) {
-            currentStageModeRef.current = mode;
-            setActiveStageMode(mode);
-          }
-        },
-      });
-    }, section);
+            if (mode !== currentStageModeRef.current) {
+              currentStageModeRef.current = mode;
+              setActiveStageMode(mode);
+            }
+          },
+        });
+
+        ScrollTrigger.sort();
+      }, section);
+    }, 60);
 
     return () => {
-      ctx.revert();
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
     };
   }, [isMobile, reducedMotion]);
 
@@ -183,17 +206,21 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
         {/* Top Header Bar */}
         <header className="model-stage-topbar">
           <div className="stage-eyebrow-group">
-            <span className="stage-eyebrow-index">03 / {t.stage3d.featuredIn3D}</span>
+            <span className="stage-eyebrow-index text-strobo">03 / {t.stage3d.featuredIn3D}</span>
             <h2 id="model-stage-heading" className="stage-eyebrow-title">
               {t.stage3d.featuredIn3D}
             </h2>
+            <div className="stage-live-ticker" aria-live="polite">
+              <span className="stage-live-text">{typedStageLabel}</span>
+              <span className="typing-cursor">▌</span>
+            </div>
           </div>
 
           <div className="stage-meta-group">
             <span className="stage-project-title">{activeProject.title}</span>
             <div className="stage-meta-badges">
-              <span className="stage-badge-cat">3D / CGI</span>
-              <span className="stage-badge-pending">{t.stage3d.assetPending}</span>
+              <span className="stage-badge-cat text-strobo-glitch">3D / CGI</span>
+              <span className="stage-badge-pending text-strobo">{t.stage3d.assetPending}</span>
             </div>
           </div>
         </header>
@@ -218,7 +245,7 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
               <circle cx="100" cy="100" r="4" fill="currentColor" />
             </svg>
             <div className="poster-caption">
-              <span className="poster-pending-label">{t.stage3d.assetPending}</span>
+              <span className="poster-pending-label text-strobo-glitch">{t.stage3d.assetPending}</span>
               <span className="poster-loading-text">{t.stage3d.loading3D}</span>
             </div>
           </div>

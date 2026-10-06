@@ -20,6 +20,10 @@
 - Resolved browser scroll fighting: removed `scroll-behavior: smooth` from `html` and integrated official Lenis smooth scroll CSS.
 - Tuned Lenis inertia (`duration: 1.35`, `wheelMultiplier: 0.85`, smooth anchor click interception).
 - Implemented chapter entrance/exit delays & plateaus in Reel and ModelStage (entrance pause on pin, generous stage scrubs, exit buffer before unpin).
+- Resolved Reel & ModelStage pin spacer conflict: pinned ModelStage section directly in block flow, removed containing-block `overflow: clip` trap, and synchronized trigger sorting (`ScrollTrigger.sort()`).
+- Added depth zoom-in zoom-out lens effect on horizontal Reel cards and breathing scale on Hero/ModelStage.
+- Added kinetic strobo text animations (`text-strobo`, `text-strobo-glitch`) on brand badges, pending labels, and chapter indices.
+- Added typewriter typing text effect (`useTypewriter` hook) with live stage status ticker and Hero role reveal.
 - Build PASS.
 
 ## Asumsi & Catatan F6

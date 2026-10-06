@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../../lib/gsap';
 import { useLocale } from '../../../hooks/useLocale';
+import { useTypewriter } from '../../../hooks/useTypewriter';
 import { Tag } from '../../atoms/Tag/Tag';
 import { Icon } from '../../atoms/Icon/Icon';
 import './Hero.css';
@@ -15,6 +16,8 @@ export const Hero: React.FC<HeroProps> = ({ isReady = true }) => {
   const scribblePathRef = useRef<SVGPathElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const orbitalRef = useRef<HTMLDivElement | null>(null);
+
+  const typedRole = useTypewriter(t.hero.roleLine, 28, 800);
 
   useEffect(() => {
     if (!isReady) return;
@@ -117,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ isReady = true }) => {
       <div className="hero-container">
         {/* Upper Positioning */}
         <div className="hero-eyebrow">
-          <span className="hero-eyebrow__badge">AP // PORTFOLIO</span>
+          <span className="hero-eyebrow__badge text-strobo">AP // PORTFOLIO</span>
           <span className="hero-eyebrow__title">{t.hero.eyebrow}</span>
         </div>
 
@@ -155,7 +158,7 @@ export const Hero: React.FC<HeroProps> = ({ isReady = true }) => {
               <div className="hero-orbital-axis" />
               <div className="hero-orbital-core" />
             </div>
-            <span className="hero-3d-tag">{t.hero.pending3D}</span>
+            <span className="hero-3d-tag text-strobo-glitch">{t.hero.pending3D}</span>
           </div>
         </div>
 
@@ -167,7 +170,10 @@ export const Hero: React.FC<HeroProps> = ({ isReady = true }) => {
               <span className="disciplines-divider">·</span>
               <span className="disciplines-text">{t.hero.disciplinesLine}</span>
             </div>
-            <p className="hero-role">{t.hero.roleLine}</p>
+            <p className="hero-role">
+              {typedRole}
+              <span className="typing-cursor">▌</span>
+            </p>
           </div>
 
           <div className="hero-scroll-cue">

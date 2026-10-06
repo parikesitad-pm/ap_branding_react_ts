@@ -133,12 +133,23 @@
   transform: rotate(-25deg);
 }
 
+@keyframes corePulseZoom {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px rgba(255, 90, 44, 0.4);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 45px rgba(255, 90, 44, 0.7);
+  }
+}
+
 .hero-orbital-core {
   width: 24%;
   height: 24%;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #FF9A78 0%, #FF5A2C 60%, #A32A0C 100%);
-  box-shadow: 0 0 30px rgba(255, 90, 44, 0.4);
+  animation: corePulseZoom 4.5s ease-in-out infinite;
 }
 
 @keyframes orbitalSpin {
