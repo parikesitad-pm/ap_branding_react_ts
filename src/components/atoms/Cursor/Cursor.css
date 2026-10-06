@@ -1,0 +1,51 @@
+.app-cursor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  pointer-events: none;
+  user-select: none;
+}
+
+.app-cursor__pointer {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--flare);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.app-cursor__label {
+  margin-left: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  text-transform: uppercase;
+}
+
+.app-cursor--view .app-cursor__pointer {
+  width: 28px;
+  height: 28px;
+  background: var(--cobalt);
+  opacity: 0.85;
+}
+
+.app-cursor--drag .app-cursor__pointer {
+  width: 24px;
+  height: 24px;
+  background: var(--flare);
+}
+
+.app-cursor--play .app-cursor__pointer {
+  width: 32px;
+  height: 32px;
+  background: var(--ink);
+}
+
+.app-cursor--external .app-cursor__pointer {
+  width: 16px;
+  height: 16px;
+  background: var(--cobalt);
+}

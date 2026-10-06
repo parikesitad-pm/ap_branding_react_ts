@@ -7,6 +7,13 @@ export const ko: TranslationSchema = {
     about: '소개',
     contact: '문의',
   },
+  categories: {
+    all: '전체',
+    graphic: '그래픽 디자인',
+    '3d': '3D 모델링',
+    animation: '애니메이션',
+    photo: '사진',
+  },
   hero: {
     roleLine: '그래픽 디자이너, 3D 모델러, 애니메이터, 포토그래퍼, 비디오그래퍼.',
     scrollHint: '계속 스크롤하세요. 작품이 가로 방향으로 펼쳐집니다.',
@@ -78,9 +85,13 @@ export const ko: TranslationSchema = {
   a11y: {
     switchLanguage: '언어 선택',
     selectTheme: '테마 변경',
+    menuOpen: '메뉴 열기',
+    menuClose: '메뉴 닫기',
+    progress: '스크롤 진행률',
   },
   common: {
     placeholderNotice: '포트폴리오 에셋 준비 중입니다. 공식 작품이 업데이트될 예정입니다.',
+    viewWork: '작품 보기',
+    startProject: '프로젝트 시작하기',
   },
 };
-

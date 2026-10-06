@@ -1,34 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageLayout } from '../components/templates/PageLayout/PageLayout';
+import { Button } from '../components/atoms/Button/Button';
+import { Tag } from '../components/atoms/Tag/Tag';
+import { Icon } from '../components/atoms/Icon/Icon';
+import { Cursor } from '../components/atoms/Cursor/Cursor';
+import { SectionTitle } from '../components/molecules/SectionTitle/SectionTitle';
+import { FilterChips } from '../components/molecules/FilterChips/FilterChips';
+import { ProjectCaption } from '../components/molecules/ProjectCaption/ProjectCaption';
+import { ProgressBar } from '../components/molecules/ProgressBar/ProgressBar';
 import { siteMeta, disciplinesList } from '../data/site';
 import { projects } from '../data/projects';
+import type { Category } from '../data/types';
 import { useLocale } from '../hooks/useLocale';
 import './Home.css';
 
 export const Home: React.FC = () => {
   const { t, locale } = useLocale();
+  const [activeCategory, setActiveCategory] = useState<Category | 'all'>('all');
+
+  const filteredProjects = activeCategory === 'all'
+    ? projects
+    : projects.filter((proj) => proj.category === activeCategory);
+
+  const filterRatio = Math.round((filteredProjects.length / projects.length) * 100);
 
   return (
     <PageLayout>
-      <div className="home-container">
+      <div className="home-container" id="top">
         {/* Foundation Hero Preview */}
-        <section className="foundation-hero">
-          <div className="foundation-badge">Phase F0 — Foundation Baseline</div>
+        <section className="foundation-hero" id="about">
+          <div className="foundation-badge">
+            <Tag label="F1 — Atoms & Molecules Complete" variant="accent" />
+          </div>
           <h1 className="hero-name">{siteMeta.name}</h1>
           <p className="hero-title">{siteMeta.title}</p>
           <p className="hero-statement">{t.intro.statement}</p>
-          <div className="locale-indicator">
-            Active Locale: <code>{locale}</code>
+
+          <div className="hero-actions">
+            <Button
+              href="#work"
+              variant="primary"
+              size="md"
+              icon={<Icon name="arrow-right" size={16} />}
+            >
+              {t.common.viewWork}
+            </Button>
+            <Button
+              href="#contact"
+              variant="secondary"
+              size="md"
+              icon={<Icon name="arrow-up-right" size={16} />}
+            >
+              {t.common.startProject}
+            </Button>
+            <Button
+              variant="ghost"
+              size="md"
+              icon={<Icon name="globe" size={16} />}
+            >
+              Locale: {locale.toUpperCase()}
+            </Button>
           </div>
         </section>
 
-        {/* Disciplines Data Verification */}
-        <section className="foundation-section">
-          <h2 className="section-heading">{t.disciplines.title}</h2>
+        {/* Disciplines Section with SectionTitle */}
+        <section className="foundation-section" id="disciplines">
+          <SectionTitle
+            index="01"
+            eyebrow="Capabilities"
+            title={t.disciplines.title}
+            description="From high-fidelity 3D modeling and CGI to complete multidisciplinary visual identity systems."
+          />
           <div className="disciplines-grid">
             {disciplinesList.map((item) => (
               <div key={item.id} className="discipline-card">
-                <span className="discipline-id">{item.id.toUpperCase()}</span>
+                <div className="discipline-card__top">
+                  <span className="discipline-id">{item.id.toUpperCase()}</span>
+                  <Tag label="Core" variant="muted" />
+                </div>
                 <h3 className="discipline-name">
                   {item.id === '3d' && t.disciplines.d3d.title}
                   {item.id === 'graphic' && t.disciplines.graphic.title}
@@ -48,31 +97,89 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* Typed Projects Data Verification */}
-        <section className="foundation-section">
-          <h2 className="section-heading">{t.reel.title}</h2>
-          <p className="section-sub">{t.reel.subtitle}</p>
+        {/* Selected Work Section with FilterChips, ProgressBar, and ProjectCaption */}
+        <section className="foundation-section" id="work">
+          <SectionTitle
+            index="02"
+            eyebrow="Portfolio"
+            title={t.reel.title}
+            description={t.reel.subtitle}
+          />
+
+          <div className="work-controls">
+            <FilterChips
+              active={activeCategory}
+              onChange={setActiveCategory}
+            />
+            <div className="work-progress-wrap">
+              <span className="work-progress-count">
+                {filteredProjects.length} / {projects.length}
+              </span>
+              <ProgressBar value={filterRatio} max={100} />
+            </div>
+          </div>
+
           <div className="projects-grid">
-            {projects.map((proj) => (
+            {filteredProjects.map((proj) => (
               <article key={proj.id} className="project-card">
                 <div className="project-media-placeholder">
                   <span className="placeholder-tag">[{proj.media.type.toUpperCase()}]</span>
                   <span className="placeholder-caption">{proj.caption}</span>
                 </div>
                 <div className="project-meta">
-                  <h3 className="project-title">{proj.title}</h3>
-                  <div className="project-details">
-                    <span className="project-cat">{proj.category}</span>
-                    <span className="project-year">{proj.year}</span>
-                  </div>
+                  <ProjectCaption project={proj} />
                 </div>
               </article>
             ))}
           </div>
         </section>
 
+        {/* F1 Atomic Component Showcase & Presentational Shells */}
+        <section className="foundation-section atomic-showcase" aria-label="Atomic UI Verification">
+          <SectionTitle
+            index="03"
+            eyebrow="Atomic Architecture"
+            title="Design System & Shells"
+            description="Verified presentational atoms, molecules, and state shells ready for future motion phases."
+          />
+
+          <div className="showcase-grid">
+            <div className="showcase-box">
+              <span className="showcase-box__label">Cursor Shell (F5 Ready)</span>
+              <div className="cursor-demo-row">
+                <div className="cursor-demo-item">
+                  <Cursor mode="default" />
+                  <span className="cursor-demo-title">Default</span>
+                </div>
+                <div className="cursor-demo-item">
+                  <Cursor mode="view" />
+                  <span className="cursor-demo-title">View</span>
+                </div>
+                <div className="cursor-demo-item">
+                  <Cursor mode="drag" />
+                  <span className="cursor-demo-title">Drag</span>
+                </div>
+                <div className="cursor-demo-item">
+                  <Cursor mode="play" />
+                  <span className="cursor-demo-title">Play</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="showcase-box">
+              <span className="showcase-box__label">Tag Variants</span>
+              <div className="tags-demo-row">
+                <Tag label="3D Modeling" variant="accent" />
+                <Tag label="Graphic Design" variant="default" />
+                <Tag label="Animation" variant="muted" />
+                <Tag label="2026" variant="default" />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Contact Footer Baseline */}
-        <footer className="foundation-footer">
+        <footer className="foundation-footer" id="contact">
           <h2 className="footer-title">{t.contact.title}</h2>
           <p className="footer-lead">{t.contact.lead}</p>
           <div className="footer-meta">
@@ -121,4 +228,3 @@ export const Home: React.FC = () => {
     </PageLayout>
   );
 };
-

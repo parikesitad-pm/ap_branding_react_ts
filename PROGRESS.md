@@ -1,7 +1,7 @@
 # Progress
 
 - [x] F0 Foundation
-- [ ] F1 Atoms & Molecules
+- [x] F1 Atoms & Molecules
 - [ ] F2 Hero + Intro + Preloader
 - [ ] F3 Horizontal Reel
 - [ ] F4 ModelStage 3D
@@ -16,10 +16,20 @@
 - Canonical attribution & developer CTA ditambahkan ke `index.html`, `src/main.tsx`, `package.json`, `README.md`, dan footer.
 - Build production lolos verifikasi (`dist/`).
 
+## Asumsi & Catatan F1
+
+- Atoms (Button, Chip, Tag, Icon, Cursor, ThemeToggle, LanguageSwitcher) dan Molecules (FilterChips, ProjectCaption, ProgressBar, NavLink, SectionTitle) selesai diimplementasikan.
+- Organism Header dibuat dengan responsive navigation, semantic HTML, keyboard accessibility, serta integrasi ThemeToggle dan LanguageSwitcher.
+- Cursor diimplementasikan sebagai presentational state shell (`default`, `view`, `drag`, `play`, `external`) tanpa active pointer tracking (pointer tracking dijadwalkan untuk F5).
+- Button dibuat polymorphic (`<button>` / `<a>`) dengan class hooks `.magnetic-wrap` & `.magnetic-inner` untuk integrasi magnetic motion F5 tanpa rewrite.
+- I18n sinkron di 4 bahasa (`en`, `zh-CN`, `ja`, `ko`) untuk kategori proyek (`all`, `graphic`, `3d`, `animation`, `photo`) dan label aksesibilitas.
+- Integrasi showcase komponen di `Home.tsx` memverifikasi seluruh komponen aktif dan lolos typecheck tanpa dead-code.
+- Build production lolos verifikasi (`npm run build`).
+
 ## Specifications for Future Phases
 
 ### F5 — Developer CLI Easter Egg Specification
-- **Trigger**: Subtle `>_` button or "open developer console" in footer.
+- **Trigger**: Subtle `>_` button atau "open developer console" in footer.
 - **Implementation**: Pure React state + typed parser (NO external terminal libraries).
 - **Opening copy**:
   ```text

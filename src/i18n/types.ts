@@ -7,6 +7,13 @@ export interface TranslationSchema {
     about: string;
     contact: string;
   };
+  categories: {
+    all: string;
+    graphic: string;
+    '3d': string;
+    animation: string;
+    photo: string;
+  };
   hero: {
     roleLine: string;
     scrollHint: string;
@@ -78,9 +85,13 @@ export interface TranslationSchema {
   a11y: {
     switchLanguage: string;
     selectTheme: string;
+    menuOpen: string;
+    menuClose: string;
+    progress: string;
   };
   common: {
     placeholderNotice: string;
+    viewWork: string;
+    startProject: string;
   };
 }
-

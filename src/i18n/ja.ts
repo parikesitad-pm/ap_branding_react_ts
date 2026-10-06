@@ -7,6 +7,13 @@ export const ja: TranslationSchema = {
     about: 'プロフィール',
     contact: 'お問い合わせ',
   },
+  categories: {
+    all: 'すべて',
+    graphic: 'グラフィックデザイン',
+    '3d': '3Dモデリング',
+    animation: 'アニメーション',
+    photo: '写真',
+  },
   hero: {
     roleLine: 'グラフィックデザイナー、3Dモデラー、アニメーター、写真家、ビデオグラファー。',
     scrollHint: 'スクロールを続けてください。作品が横方向に展開します。',
@@ -78,9 +85,13 @@ export const ja: TranslationSchema = {
   a11y: {
     switchLanguage: '言語を選択',
     selectTheme: 'テーマを切り替え',
+    menuOpen: 'メニューを開く',
+    menuClose: 'メニューを閉じる',
+    progress: 'スクロール進捗',
   },
   common: {
     placeholderNotice: 'ポートフォリオ素材は準備中です。公式作品は順次更新されます。',
+    viewWork: '作品を見る',
+    startProject: 'プロジェクトを開始',
   },
 };
-

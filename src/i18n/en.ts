@@ -7,6 +7,13 @@ export const en: TranslationSchema = {
     about: 'About',
     contact: 'Contact',
   },
+  categories: {
+    all: 'All',
+    graphic: 'Graphic design',
+    '3d': '3D modeling',
+    animation: 'Animation',
+    photo: 'Photography',
+  },
   hero: {
     roleLine: 'Graphic designer, 3D modeler, animator, photographer, and videographer.',
     scrollHint: 'Keep scrolling. The work moves sideways.',
@@ -78,9 +85,13 @@ export const en: TranslationSchema = {
   a11y: {
     switchLanguage: 'Select language',
     selectTheme: 'Toggle color theme',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    progress: 'Scroll progress',
   },
   common: {
     placeholderNotice: 'Portfolio assets currently in staging. Official works will be updated.',
+    viewWork: 'View work',
+    startProject: 'Start a project',
   },
 };
-

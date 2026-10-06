@@ -1,0 +1,30 @@
+.app-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  line-height: 1.2;
+}
+
+.app-tag--default {
+  background: var(--panel-bg);
+  color: var(--fg);
+  border: 1px solid var(--line);
+}
+
+.app-tag--accent {
+  background: rgba(255, 90, 44, 0.12);
+  color: var(--flare);
+  border: 1px solid rgba(255, 90, 44, 0.3);
+}
+
+.app-tag--muted {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}

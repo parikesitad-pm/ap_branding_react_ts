@@ -1,0 +1,48 @@
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 48rem;
+}
+
+.section-title__top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title__index {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: var(--flare);
+}
+
+.section-title__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-title__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+.section-title__description {
+  margin: 0.5rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 36ch;
+}

@@ -7,6 +7,13 @@ export const zhCN: TranslationSchema = {
     about: '关于',
     contact: '联系',
   },
+  categories: {
+    all: '全部',
+    graphic: '平面设计',
+    '3d': '3D建模',
+    animation: '动画设计',
+    photo: '静态摄影',
+  },
   hero: {
     roleLine: '平面设计师、3D建模师、动画师、摄影师与摄像师。',
     scrollHint: '继续向下滚动。作品将横向展开。',
@@ -78,9 +85,13 @@ export const zhCN: TranslationSchema = {
   a11y: {
     switchLanguage: '选择语言',
     selectTheme: '切换颜色主题',
+    menuOpen: '打开菜单',
+    menuClose: '关闭菜单',
+    progress: '滚动进度',
   },
   common: {
     placeholderNotice: '作品集素材正在整理准备中，官方作品即将更新。',
+    viewWork: '浏览作品',
+    startProject: '发起项目',
   },
 };
-

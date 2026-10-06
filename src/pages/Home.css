@@ -19,15 +19,6 @@
 .foundation-badge {
   display: inline-block;
   align-self: flex-start;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: var(--flare);
-  color: #FFFFFF;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
 }
 
 .hero-name {
@@ -56,36 +47,18 @@
   color: var(--fg);
 }
 
-.locale-indicator {
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-
-.locale-indicator code {
-  background: var(--panel-bg);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-weight: 600;
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .foundation-section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-}
-
-.section-heading {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  letter-spacing: -0.01em;
-  color: var(--fg);
-}
-
-.section-sub {
-  margin: -1rem 0 0;
-  color: var(--muted);
 }
 
 .disciplines-grid {
@@ -110,6 +83,12 @@
   transform: translateY(-2px);
 }
 
+.discipline-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .discipline-id {
   font-size: 0.75rem;
   font-weight: 700;
@@ -130,6 +109,30 @@
   font-size: 0.9375rem;
   color: var(--muted);
   line-height: 1.4;
+}
+
+.work-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.work-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 180px;
+}
+
+.work-progress-count {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .projects-grid {
@@ -175,30 +178,60 @@
 
 .project-meta {
   padding: 1.25rem;
+}
+
+/* Atomic Architecture Showcase */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.showcase-box {
+  padding: 1.5rem;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--panel-bg);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.project-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+.showcase-box__label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--fg);
-}
-
-.project-details {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
-.project-cat {
-  text-transform: capitalize;
+.cursor-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
+.cursor-demo-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cursor-demo-title {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.tags-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Footer Section */
 .foundation-footer {
   padding: 3rem 0;
   border-top: 1px solid var(--line);
@@ -308,4 +341,3 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-

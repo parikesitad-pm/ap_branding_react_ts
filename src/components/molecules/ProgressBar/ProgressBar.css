@@ -1,0 +1,15 @@
+.app-progress {
+  height: 3px;
+  width: 100%;
+  background: var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.app-progress__bar {
+  height: 100%;
+  width: 100%;
+  background: var(--flare);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+}
