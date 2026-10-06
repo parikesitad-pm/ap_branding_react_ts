@@ -18,10 +18,12 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
     }
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.4,
     });
 
     lenisRef.current = lenis;
@@ -37,7 +39,23 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
     gsap.ticker.add(tickerUpdate);
     gsap.ticker.lagSmoothing(0);
 
+    // Smooth scroll for in-page anchors (#work, #3d, #contact, etc.)
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a');
+      if (!target) return;
+      const href = target.getAttribute('href');
+      if (href && href.startsWith('#') && href.length > 1) {
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          lenis.scrollTo(el as HTMLElement, { offset: 0, duration: 1.4 });
+        }
+      }
+    };
+    document.addEventListener('click', handleAnchorClick);
+
     return () => {
+      document.removeEventListener('click', handleAnchorClick);
       gsap.ticker.remove(tickerUpdate);
       lenis.destroy();
       lenisRef.current = null;

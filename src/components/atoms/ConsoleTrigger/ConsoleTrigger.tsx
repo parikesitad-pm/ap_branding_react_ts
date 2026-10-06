@@ -27,3 +27,4 @@ export const ConsoleTrigger: React.FC<ConsoleTriggerProps> = ({
     </button>
   );
 };
+

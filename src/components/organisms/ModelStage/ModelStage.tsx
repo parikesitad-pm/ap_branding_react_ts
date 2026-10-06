@@ -91,18 +91,26 @@ export const ModelStage: React.FC<ModelStageProps> = ({ className = '', onModalS
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: '+=200%',
+        end: '+=260%',
         pin: shell,
-        scrub: 0.5,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 1.2,
         onUpdate: (self) => {
           const progress = self.progress;
-          stageProgressRef.current = progress;
 
-          // Determine stage state based on threshold intervals
+          // Normalize shader transition with chapter entry & exit pause plateaus
+          // 0.00 -> 0.14: Chapter entry delay (settles firmly on FINAL state)
+          // 0.14 -> 0.86: Progressive scrub between shaders
+          // 0.86 -> 1.00: Chapter exit buffer delay (settles firmly on WIREFRAME state)
+          const shaderProgress = Math.max(0, Math.min(1, (progress - 0.14) / 0.72));
+          stageProgressRef.current = shaderProgress;
+
+          // Determine stage state based on threshold intervals with comfortable plateaus
           let mode: StageMode = 'final';
-          if (progress >= 0.66) {
+          if (progress >= 0.72) {
             mode = 'wireframe';
-          } else if (progress >= 0.33) {
+          } else if (progress >= 0.35) {
             mode = 'shaded';
           }
 

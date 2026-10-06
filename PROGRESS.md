@@ -17,6 +17,9 @@
 - Reel measurement uses actual viewport width.
 - Added globally discoverable `>_` developer-console trigger.
 - Added real CLI focus trap + focus restoration.
+- Resolved browser scroll fighting: removed `scroll-behavior: smooth` from `html` and integrated official Lenis smooth scroll CSS.
+- Tuned Lenis inertia (`duration: 1.35`, `wheelMultiplier: 0.85`, smooth anchor click interception).
+- Implemented chapter entrance/exit delays & plateaus in Reel and ModelStage (entrance pause on pin, generous stage scrubs, exit buffer before unpin).
 - Build PASS.
 
 ## Asumsi & Catatan F6

@@ -11,10 +11,10 @@
   overflow: clip;
 }
 
-/* Height for desktop scroll scrubbing (~3 full viewports) */
+/* Desktop height managed by ScrollTrigger pin spacer */
 @media (min-width: 769px) {
   .model-stage-section {
-    min-height: 250vh;
+    min-height: 100vh;
   }
 }
 

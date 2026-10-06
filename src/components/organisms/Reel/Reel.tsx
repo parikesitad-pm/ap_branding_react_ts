@@ -102,12 +102,10 @@ export const Reel: React.FC = () => {
 
         const getScrollDuration = () => {
           const horizontalDistance = getHorizontalDistance();
-          return Math.max(window.innerHeight * 1.25, horizontalDistance * 1.4);
+          return Math.max(window.innerHeight * 1.5, horizontalDistance * 1.6);
         };
 
-        gsap.to(track, {
-          x: () => -getHorizontalDistance(),
-          ease: 'none',
+        const tl = gsap.timeline({
           scrollTrigger: {
             id: 'reel-horizontal',
             trigger: section,
@@ -115,16 +113,31 @@ export const Reel: React.FC = () => {
             end: () => `+=${getScrollDuration()}`,
             pin: true,
             pinSpacing: true,
-            scrub: 1.15,
+            scrub: 1.25,
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
-              const currentProgress = Math.round(self.progress * 100);
-              setProgress(currentProgress);
+              const p = self.progress;
+              // Map horizontal movement across the active phase (0.12 -> 0.88)
+              const moveProgress = Math.max(0, Math.min(1, (p - 0.12) / 0.76));
+              setProgress(Math.round(moveProgress * 100));
               updateActiveIndexFromTrack();
             },
           },
         });
+
+        // 1. Chapter entry delay / settling buffer (pause before sliding starts)
+        tl.to({}, { duration: 0.15 });
+
+        // 2. Main horizontal rail movement across projects
+        tl.to(track, {
+          x: () => -getHorizontalDistance(),
+          ease: 'none',
+          duration: 1.0,
+        });
+
+        // 3. Chapter exit delay / completion buffer (pause before unpinning to 3D)
+        tl.to({}, { duration: 0.18 });
       }, sectionRef);
     }, 50);
 
