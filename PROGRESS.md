@@ -137,3 +137,13 @@
 - Reduced-motion renders the final readable state immediately.
 - Limitation note on CJK: Locales without standard whitespace delimiters (JA, ZH) animate the manifesto sentence as a single unit without artificial word breaking or Intl.Segmenter dependencies.
 
+## Sprint 8 — Kinetic Disciplines Marquee
+
+- Replaced scroll-scrubbed row translation with autonomous GSAP marquee loops.
+- Added duplicated equal-width sets for seamless looping.
+- Preserved alternating direction and slightly varied row speeds.
+- Added offscreen pause/resume via IntersectionObserver.
+- Deferred scroll-based timeScale boost for stability.
+- Reduced-motion renders the marquee as static readable discipline rows.
+
+
