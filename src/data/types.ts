@@ -24,6 +24,18 @@ export type Media =
       height: number;
     };
 
+export type ReelLayout =
+  | 'portrait'
+  | 'landscape'
+  | 'square'
+  | 'wide'
+  | 'tall';
+
+export type ReelAlignment =
+  | 'center'
+  | 'up'
+  | 'down';
+
 export interface Project {
   id: string;
   title: string;
@@ -31,6 +43,8 @@ export interface Project {
   category: Category;
   media: Media;
   caption?: string;
+  reelLayout?: ReelLayout;
+  alignment?: ReelAlignment;
 }
 
 export interface DisciplineItem {

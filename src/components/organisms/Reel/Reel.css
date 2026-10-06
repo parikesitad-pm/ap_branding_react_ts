@@ -1,0 +1,613 @@
+/* ==========================================================================
+   Reel Organism — Horizontal Selected Works
+   ========================================================================== */
+
+.reel-section {
+  position: relative;
+  background-color: #0A0C2B; /* Branded Ink background in both light & dark */
+  color: #EEF0FA;            /* Branded Chalk text */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Pinned State (GSAP ScrollTrigger)
+   -------------------------------------------------------------------------- */
+.reel-section--pinned {
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reel-section--pinned .reel-track-viewport {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.reel-section--pinned .reel-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  padding: 0 clamp(2.5rem, 6vw, 8rem);
+  width: max-content;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Reduced-Motion State (Native Horizontal Overflow)
+   -------------------------------------------------------------------------- */
+.reel-section--native {
+  min-height: auto;
+  padding: 3.5rem 0 2.5rem;
+  overflow: hidden;
+}
+
+.reel-section--native .reel-track-viewport {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 90, 44, 0.4) transparent;
+  padding: 1.5rem 0 2rem;
+}
+
+.reel-section--native .reel-track-viewport::-webkit-scrollbar {
+  height: 4px;
+}
+
+.reel-section--native .reel-track-viewport::-webkit-scrollbar-thumb {
+  background: var(--flare);
+  border-radius: 2px;
+}
+
+.reel-section--native .reel-track {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  padding: 0 1.25rem;
+  width: max-content;
+}
+
+.reel-section--native .reel-card,
+.reel-section--native .reel-panel {
+  scroll-snap-align: center;
+  width: min(84vw, 360px) !important;
+  margin-top: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar UI
+   -------------------------------------------------------------------------- */
+.reel-top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 3vh, 2.25rem) clamp(1.5rem, 4vw, 3.5rem) 0.75rem;
+  border-bottom: 1px solid rgba(185, 188, 255, 0.12);
+  gap: 1.5rem;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.reel-top-bar__header {
+  flex-shrink: 0;
+}
+
+.reel-top-bar__title .section-title__heading {
+  color: #EEF0FA;
+}
+
+.reel-top-bar__title .section-title__index {
+  color: var(--flare);
+}
+
+.reel-top-bar__title .section-title__description {
+  color: #B9BCFF;
+  max-width: 44ch;
+}
+
+.reel-top-bar__controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.reel-top-bar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Dark showcase override for FilterChips inside Reel */
+.reel-top-bar__chips .app-chip {
+  background: rgba(238, 240, 250, 0.05);
+  border-color: rgba(185, 188, 255, 0.2);
+  color: #B9BCFF;
+}
+
+.reel-top-bar__chips .app-chip:hover {
+  border-color: #EEF0FA;
+  color: #EEF0FA;
+}
+
+.reel-top-bar__chips .app-chip--active {
+  background: var(--flare);
+  border-color: var(--flare);
+  color: #EEF0FA;
+}
+
+.reel-counter-top {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  color: #EEF0FA;
+  user-select: none;
+}
+
+.reel-counter-current {
+  color: var(--flare);
+}
+
+.reel-counter-sep {
+  color: rgba(185, 188, 255, 0.4);
+}
+
+.reel-counter-total {
+  color: #B9BCFF;
+}
+
+/* --------------------------------------------------------------------------
+   Editorial Panels
+   -------------------------------------------------------------------------- */
+.reel-panel {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.reel-panel__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(238, 240, 250, 0.03);
+  border: 1px solid rgba(185, 188, 255, 0.12);
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.reel-panel--start {
+  width: clamp(280px, 24vw, 360px);
+}
+
+.reel-panel--process {
+  width: clamp(300px, 26vw, 400px);
+}
+
+.reel-panel--end {
+  width: clamp(280px, 24vw, 360px);
+}
+
+.reel-panel__eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--flare);
+}
+
+.reel-panel__heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #EEF0FA;
+  margin: 0;
+}
+
+.reel-panel__desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #B9BCFF;
+  margin: 0;
+}
+
+.reel-panel__quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #EEF0FA;
+  margin: 0;
+}
+
+.reel-panel__accent-line {
+  width: 48px;
+  height: 2px;
+  background: var(--flare);
+  margin-top: 0.5rem;
+}
+
+.reel-panel__cta {
+  margin-top: 0.75rem;
+  align-self: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   Project Cards (Asymmetric Layouts)
+   -------------------------------------------------------------------------- */
+.reel-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transition: transform var(--transition-normal);
+  outline: none;
+}
+
+.reel-card:focus-visible {
+  outline: 2px solid var(--flare);
+  outline-offset: 4px;
+}
+
+/* Editorial Stagger Alignments */
+.reel-card--align-center {
+  margin-top: 0;
+}
+
+.reel-card--align-up {
+  margin-top: -5vh;
+}
+
+.reel-card--align-down {
+  margin-top: 5vh;
+}
+
+/* Asymmetric Dimension Presets */
+.reel-card--portrait {
+  width: clamp(280px, 22vw, 340px);
+}
+.reel-card--portrait .reel-card__media {
+  aspect-ratio: 4 / 5;
+}
+
+.reel-card--tall {
+  width: clamp(260px, 20vw, 320px);
+}
+.reel-card--tall .reel-card__media {
+  aspect-ratio: 3 / 4.4;
+}
+
+.reel-card--landscape {
+  width: clamp(340px, 30vw, 460px);
+}
+.reel-card--landscape .reel-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.reel-card--wide {
+  width: clamp(380px, 34vw, 520px);
+}
+.reel-card--wide .reel-card__media {
+  aspect-ratio: 16 / 9;
+}
+
+.reel-card--square {
+  width: clamp(300px, 24vw, 380px);
+}
+.reel-card--square .reel-card__media {
+  aspect-ratio: 1 / 1;
+}
+
+/* 3D Emphasized Card */
+.reel-card--3d .reel-card__media {
+  border-color: rgba(255, 90, 44, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.reel-card--3d .reel-card__media:hover {
+  border-color: var(--flare);
+  box-shadow: 0 12px 40px rgba(255, 90, 44, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Card Media Visual & Placeholder Architecture
+   -------------------------------------------------------------------------- */
+.reel-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.reel-card__media {
+  position: relative;
+  width: 100%;
+  background: #141740;
+  border: 1px solid rgba(185, 188, 255, 0.15);
+  overflow: hidden;
+  transition: transform var(--transition-normal), border-color var(--transition-fast), box-shadow var(--transition-normal);
+  box-sizing: border-box;
+}
+
+.reel-card__media-surface {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 50% 40%, rgba(36, 56, 255, 0.12) 0%, rgba(10, 12, 43, 0.6) 100%);
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.reel-card__grid-svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.reel-card__placeholder-graphic {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.reel-card__wireframe-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--haze);
+  transition: transform var(--transition-normal);
+}
+
+.reel-card__wireframe-icon--3d {
+  width: 68px;
+  height: 68px;
+}
+
+.reel-card__placeholder-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.reel-card__placeholder-badge {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #EEF0FA;
+  background: rgba(10, 12, 43, 0.6);
+  border: 1px solid rgba(185, 188, 255, 0.2);
+  padding: 0.2rem 0.5rem;
+}
+
+.reel-card__placeholder-type {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #B9BCFF;
+}
+
+.reel-card__watermark {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(185, 188, 255, 0.05);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Hover Interaction
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .reel-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .reel-card:hover .reel-card__media {
+    border-color: rgba(255, 90, 44, 0.7);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  }
+
+  .reel-card:hover .reel-card__wireframe-icon {
+    transform: scale(1.08);
+  }
+
+  .reel-card:hover .reel-card__placeholder-badge {
+    border-color: var(--flare);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Caption Wrap Inside Reel
+   -------------------------------------------------------------------------- */
+.reel-card__caption-wrap .project-caption__title {
+  color: #EEF0FA;
+}
+
+.reel-card__caption-wrap .project-caption__year {
+  color: #B9BCFF;
+}
+
+.reel-card__caption-wrap .project-caption__desc {
+  color: #B9BCFF;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Bar UI
+   -------------------------------------------------------------------------- */
+.reel-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 3vh, 2rem);
+  border-top: 1px solid rgba(185, 188, 255, 0.12);
+  gap: 2rem;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.reel-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  user-select: none;
+}
+
+.reel-hint-text {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #B9BCFF;
+  text-transform: uppercase;
+}
+
+.reel-hint-track {
+  width: 48px;
+  height: 2px;
+  background: rgba(185, 188, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.reel-hint-dot {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flare);
+  animation: reelDotScroll 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes reelDotScroll {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(44px);
+    opacity: 0;
+  }
+}
+
+.reel-progress-wrap {
+  flex: 1;
+  max-width: 420px;
+}
+
+.reel-progress-bar {
+  background: rgba(185, 188, 255, 0.15);
+}
+
+.reel-progress-bar .app-progress__bar {
+  background: var(--flare);
+}
+
+.reel-counter-bottom {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: #B9BCFF;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .reel-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .reel-top-bar__controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .reel-card--align-up {
+    margin-top: -3vh;
+  }
+
+  .reel-card--align-down {
+    margin-top: 3vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .reel-top-bar {
+    padding: 1rem 1.25rem 0.75rem;
+  }
+
+  .reel-top-bar__controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .reel-top-bar__chips {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  .reel-counter-top {
+    display: none;
+  }
+
+  .reel-bottom-bar {
+    padding: 0.75rem 1.25rem 1rem;
+    gap: 1rem;
+  }
+
+  .reel-scroll-hint {
+    display: none;
+  }
+}

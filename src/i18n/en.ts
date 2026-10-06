@@ -44,6 +44,12 @@ export const en: TranslationSchema = {
     endTitle: "That's the reel.",
     endSubtitle: 'Have something similar in mind? Tell me what you need and when.',
     startProject: 'Start a project',
+    startPanelEyebrow: '02 / ARCHIVE',
+    startPanelTitle: 'SELECTED WORK',
+    startPanelDesc: 'A selection across image, motion and space.',
+    processTag: 'PROCESS NOTE',
+    processNote: 'Every frame is a decision: light, volume, rhythm, and tension.',
+    scrollHint: 'SCROLL HORIZONTALLY',
   },
   disciplines: {
     title: 'What I make',

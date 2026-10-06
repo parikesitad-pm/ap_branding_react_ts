@@ -44,6 +44,12 @@ export interface TranslationSchema {
     endTitle: string;
     endSubtitle: string;
     startProject: string;
+    startPanelEyebrow: string;
+    startPanelTitle: string;
+    startPanelDesc: string;
+    processTag: string;
+    processNote: string;
+    scrollHint: string;
   };
   disciplines: {
     title: string;

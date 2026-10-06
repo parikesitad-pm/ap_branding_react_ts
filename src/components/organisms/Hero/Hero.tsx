@@ -181,3 +181,4 @@ export const Hero: React.FC<HeroProps> = ({ isReady = true }) => {
     </section>
   );
 };
+

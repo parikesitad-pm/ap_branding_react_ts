@@ -44,6 +44,12 @@ export const zhCN: TranslationSchema = {
     endTitle: '作品展示完毕。',
     endSubtitle: '有类似的想法或需求？随时探讨您的项目与时间计划。',
     startProject: '发起项目',
+    startPanelEyebrow: '02 / 档案',
+    startPanelTitle: '精选作品',
+    startPanelDesc: '贯穿图像、动态与空间的精选集。',
+    processTag: '创作笔记',
+    processNote: '每一帧都是抉择：光影、体量、节奏与张力。',
+    scrollHint: '水平滚动浏览',
   },
   disciplines: {
     title: '创作领域',

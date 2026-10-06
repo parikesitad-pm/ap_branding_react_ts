@@ -44,6 +44,12 @@ export const ko: TranslationSchema = {
     endTitle: '작품 소개가 끝났습니다.',
     endSubtitle: '비슷한 프로젝트를 구상 중이신가요? 필요한 작업과 일정을 알려주세요.',
     startProject: '프로젝트 시작하기',
+    startPanelEyebrow: '02 / 아카이브',
+    startPanelTitle: '주요 작품',
+    startPanelDesc: '이미지, 모션, 공간을 아우르는 작업 모음.',
+    processTag: '프로세스 노트',
+    processNote: '모든 프레임은 선택입니다: 빛, 볼륨, 리듬, 그리고 긴장감.',
+    scrollHint: '가로로 스크롤',
   },
   disciplines: {
     title: '작업 분야',

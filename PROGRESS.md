@@ -3,7 +3,7 @@
 - [x] F0 Foundation
 - [x] F1 Atoms & Molecules
 - [x] F2 Hero + Intro + Preloader
-- [ ] F3 Horizontal Reel
+- [x] F3 Horizontal Reel
 - [ ] F4 ModelStage 3D
 - [ ] F5 Disciplines + About + Contact + VideoModal + Polish
 
@@ -33,6 +33,15 @@
 - **Lenis integration**: Sinkronisasi Lenis dengan `ScrollTrigger.update` dan GSAP ticker (`gsap.ticker.add`) pada single instance di `useLenis.ts`.
 - **Reduced-motion behavior**: Branch `prefers-reduced-motion: reduce` diaktifkan di Preloader (instan complete), Hero (langsung tampil di final state tanpa parallax/stroke drawing), dan Intro (line reveal instan).
 - **Placeholder asset status**: Hero menyisakan area khusus untuk 3D ModelStage berupa lightweight SVG/CSS orbital geometry dengan label subtle `[3D ASSET PENDING]`, tanpa Canvas Three.js hingga fase F4. Temporary boundary section disiapkan untuk `#work` (F3 Selected Works).
+- Build production lolos verifikasi (`npm run build`).
+
+## Asumsi & Catatan F3
+
+- **Pin/scrub implementation**: GSAP ScrollTrigger pinned horizontal scrub dengan dynamic distance calculation (`track.scrollWidth - window.innerWidth`), `gsap.context()` cleanup `ctx.revert()`, dan sinkronisasi Lenis satu instance. Progress bar terhubung ke numeric value (`0 → 100`) dan active project index dihitung efisien berbasis viewport center tanpa re-render React berlebih pada raw frame.
+- **Filter behavior**: React state driven (`all`, `graphic`, `3d`, `animation`, `photo`). Menggunakan `Flip.getState` dan `Flip.from` untuk transisi posisi kartu yang mulus. Saat filter berganti ketika pinned, posisi horizontal di-reset ke awal secara prediktif dan `ScrollTrigger.refresh()` dipanggil. Kategori Videography diabaikan pada FilterChips karena belum ada data proyek video riil (dan tidak membuat fake project).
+- **Responsive/mobile fallback**: Pada viewport mobile (< 768px), pinning vertical ditiadakan dan dialihkan ke native horizontal swipe (`overflow-x: auto`, `scroll-snap-type: x mandatory`, kartu `min(84vw, 360px)`) dengan scrollbar aksen Flare dan filter chips yang dapat di-scroll horizontal, menghindari browser scroll jail.
+- **Reduced-motion fallback**: Pengguna dengan preferensi `prefers-reduced-motion: reduce` menerima layout native horizontal scroll tanpa pin atau transform animation, menjaga kenyamanan dan aksesibilitas penuh.
+- **Placeholder asset status**: Menampilkan 8 proyek placeholder terstruktur dengan asymmetric aspect ratio (`portrait`, `tall`, `landscape`, `wide`, `square`) dan editorial stagger alignment (`up`, `down`, `center`). Media container menggunakan wireframe SVG geometris dan label literal (`[3D MODEL PLACEHOLDER]`, `[PROJECT POSTER]`, dll.) tanpa artwork fiktif. Kartu 3D diutamakan dengan border Flare dan visual depth tanpa Three.js Canvas. Panel editorial Start, Process Note, dan Closing terintegrasi rapi di dalam rail.
 - Build production lolos verifikasi (`npm run build`).
 
 ## Specifications for Future Phases

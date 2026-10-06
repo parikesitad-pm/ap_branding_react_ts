@@ -4,43 +4,6 @@
   width: 100%;
 }
 
-/* Temporary Boundary for Selected Works (Phase F3 Placeholder) */
-.future-work-boundary {
-  padding: clamp(5rem, 10vw, 8rem) var(--pad);
-  background-color: var(--panel-bg);
-  border-top: 1px dashed var(--line);
-  border-bottom: 1px dashed var(--line);
-  color: var(--fg);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.future-work-boundary__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.25rem;
-}
-
-.future-work-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.015em;
-  color: var(--fg);
-}
-
-.future-work-desc {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--muted);
-  max-width: 48ch;
-  line-height: 1.4;
-}
-
 .section-anchor-marker {
   display: block;
   height: 0;

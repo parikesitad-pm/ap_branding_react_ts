@@ -44,6 +44,12 @@ export const ja: TranslationSchema = {
     endTitle: '作品紹介は以上です。',
     endSubtitle: 'プロジェクトのご相談やご依頼がありましたら、お気軽にご連絡ください。',
     startProject: 'プロジェクトを開始',
+    startPanelEyebrow: '02 / アーカイブ',
+    startPanelTitle: '厳選された作品',
+    startPanelDesc: 'イメージ、モーション、空間を横断する作品群。',
+    processTag: 'プロセスノート',
+    processNote: 'すべてのフレームは決断：光、立体感、リズム、そして緊張感。',
+    scrollHint: '水平にスクロール',
   },
   disciplines: {
     title: '制作領域',
