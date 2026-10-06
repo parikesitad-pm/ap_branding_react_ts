@@ -146,3 +146,4 @@ export const ReelCard: React.FC<ReelCardProps> = ({ project, index }) => {
     </article>
   );
 };
+

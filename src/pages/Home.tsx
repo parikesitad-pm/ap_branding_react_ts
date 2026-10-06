@@ -4,6 +4,7 @@ import { Preloader } from '../components/organisms/Preloader/Preloader';
 import { Hero } from '../components/organisms/Hero/Hero';
 import { Intro } from '../components/organisms/Intro/Intro';
 import { Reel } from '../components/organisms/Reel/Reel';
+import { ModelStage } from '../components/organisms/ModelStage/ModelStage';
 import { siteMeta } from '../data/site';
 import './Home.css';
 
@@ -24,6 +25,9 @@ export const Home: React.FC = () => {
 
           {/* F3: Selected Works / Horizontal Reel */}
           <Reel />
+
+          {/* F4: ModelStage 3D Centerpiece */}
+          <ModelStage />
 
           {/* Anchor for Disciplines (Scheduled for F5) */}
           <div id="disciplines" className="section-anchor-marker" aria-hidden="true" />

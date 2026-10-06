@@ -113,4 +113,20 @@ export interface TranslationSchema {
     comingNext: string;
     selectedWorksPlaceholder: string;
   };
+  stage3d: {
+    featuredIn3D: string;
+    final: string;
+    shaded: string;
+    wireframe: string;
+    dragToRotate: string;
+    scrollToExplore: string;
+    exploreIn3D: string;
+    closeViewer: string;
+    previous: string;
+    next: string;
+    assetPending: string;
+    loading3D: string;
+    webglUnavailable: string;
+    projectCount: string;
+  };
 }

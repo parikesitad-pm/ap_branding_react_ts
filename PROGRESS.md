@@ -4,8 +4,27 @@
 - [x] F1 Atoms & Molecules
 - [x] F2 Hero + Intro + Preloader
 - [x] F3 Horizontal Reel
-- [ ] F4 ModelStage 3D
+- [x] F4 ModelStage 3D
 - [ ] F5 Disciplines + About + Contact + VideoModal + Polish
+
+## Asumsi & Catatan F4
+
+- **Placeholder scene architecture**: Menggunakan geometri prosedural Three.js (TorusKnot berpresisi tinggi + cincin gimbal orbital bertingkat) dengan palet brand (Cobalt `#0038ff`, Flare `#ff3d00`, Ink `#0b1d3a`, Platinum `#cbd7e8`) tanpa artwork fiktif atau download model eksternal yang belum resmi. Disertai label literal `[3D ASSET PENDING]` dan komentar kode `// TODO: replace procedural placeholder with Afrizal's production GLB`.
+- **Lazy Canvas & poster-first pattern**: Three.js dan R3F di-code-split via `React.lazy(() => import('./ModelCanvas'))` sehingga initial bundle tetap ramping (~432 kB, chunk 3D ~987 kB terpisah). Canvas hanya di-mount ketika mendekati viewport (`rootMargin: '400px'`) atau saat modal dibuka. Poster SVG silhouette tampil instan, lalu fade-in mulus saat WebGL Canvas siap. `ModelErrorBoundary` disiapkan untuk fallback jika WebGL gagal.
+- **Scroll FINAL/SHADED/WIREFRAME**: ScrollTrigger desktop pin (`+=200%`, `scrub: 0.5`) merekam progress 0.0 → 1.0 ke mutable ref `stageProgressRef` tanpa re-render raw frame React. Material bertransisi mulus di render loop:
+  - `0.00 – 0.33` FINAL: Material lit kaya kilau metalik, cincin orbital Cobalt/Flare, contact shadows penuh.
+  - `0.33 – 0.66` SHADED: Matte clay netral bertekstur studio, menonjolkan kurvatur dan volume bentuk.
+  - `0.66 – 1.00` WIREFRAME: Translusen gelap pada bodi inti dipadu jaring kawat wireframe Cobalt bercahaya.
+- **One-model-at-a-time strategy**: Mengambil dataset proyek bertipe di mana `project.category === '3d'` (`project-02` dan `project-05`). Hanya satu model aktif yang dimuat dan dirender dalam satu waktu.
+- **Demand rendering & pause behavior**: Menggunakan `frameloop="demand"` dengan DPR `[1, 1.75]`. Invalidasi frame hanya berlangsung saat idle turntable berputar, user sedang mendrag/interaksi, transisi material berjalan, atau tema berganti. Rendering berhenti total saat tab tersembunyi (`Page Visibility API`) atau ModelStage di luar viewport. OrbitControls inline mematikan wheel zoom agar tidak membajak scroll halaman.
+- **Fullscreen Explore viewer (`ModelViewerModal`)**: Modal dialog aksesibel (`role="dialog"`, `aria-modal="true"`, scroll lock, keyboard Esc, focus trap/return ke tombol trigger). Dilengkapi zoom kontrol 3D terkendali, navigasi antar proyek 3D (panah keyboard / tombol Previous-Next), dan pemilih stage visual.
+- **Responsive & reduced-motion behavior**: Pada mobile (< 768px), pin dinonaktifkan untuk mencegah scroll jail dan touch-action dikonfigurasi (`pan-y`). Preferensi `prefers-reduced-motion` menonaktifkan auto-rotate dan animasi pin panjang, tetap menyajikan kontrol manual dan tombol Explore in 3D.
+- **Real GLB asset contract & pipeline handoff**:
+  - Source path: `assets-src/` (di-.gitignore).
+  - Runtime path: `public/models/<slug>.glb` dan `public/img/<slug>-poster.avif|webp`.
+  - Future project data: `{ id, category: '3d', media: { type: 'glb', src: '/models/<slug>.glb', poster: '...' } }`.
+  - Pipeline: `.blend` → export GLB → `@gltf-transform/cli` optimize (dedup, prune, meshopt, KTX2) → web GLB (target ideal 2–8 MB, hero hingga 10–15 MB).
+- Build production lolos verifikasi (`npm run build`).
 
 ## Asumsi & Catatan F0
 
