@@ -26,6 +26,7 @@ export const zhCN: TranslationSchema = {
   preloader: {
     loading: '载入视觉空间',
     status: '正在载入作品集',
+    ready: '作品集已准备就绪',
   },
   intro: {
     statement: '静待注视的海报，可全角翻转的模型，循环流动的动态，等待播放的影像，以及定格瞬间的照片。',

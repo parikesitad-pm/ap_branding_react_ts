@@ -1,7 +1,7 @@
 .preloader-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 20000;
   width: 100vw;
   height: 100vh;
   height: 100svh;
@@ -60,9 +60,15 @@
   color: var(--haze);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .preloader-overlay {
-    display: none;
-  }
+.preloader-sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 

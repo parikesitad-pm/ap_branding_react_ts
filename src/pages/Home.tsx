@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PageLayout } from '../components/templates/PageLayout/PageLayout';
 import { Preloader } from '../components/organisms/Preloader/Preloader';
 import { Hero } from '../components/organisms/Hero/Hero';
@@ -12,6 +12,7 @@ import { ContactFooter } from '../components/organisms/ContactFooter/ContactFoot
 import { DeveloperConsole } from '../components/organisms/DeveloperConsole/DeveloperConsole';
 import { ConsoleTrigger } from '../components/atoms/ConsoleTrigger/ConsoleTrigger';
 import { KineticDisciplines } from '../components/organisms/KineticDisciplines/KineticDisciplines';
+import { ScrollTrigger } from '../lib/gsap';
 import './Home.css';
 
 export const Home: React.FC = () => {
@@ -22,9 +23,11 @@ export const Home: React.FC = () => {
 
   const videoId = import.meta.env.VITE_INTRO_VIDEO_ID || 'yR3IpNwjKfY';
 
-  // Keyboard shortcut: Ctrl + ` or Cmd + ` toggles DeveloperConsole
+  // Keyboard shortcut: Ctrl + ` or Cmd + ` toggles DeveloperConsole (gated until preloader finishes)
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (!preloaderDone) return;
+
       if ((e.ctrlKey || e.metaKey) && e.key === '`') {
         const target = e.target as HTMLElement | null;
         const isInput =
@@ -57,7 +60,17 @@ export const Home: React.FC = () => {
 
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [isConsoleOpen, isVideoModalOpen, isModelModalOpen]);
+  }, [preloaderDone, isConsoleOpen, isVideoModalOpen, isModelModalOpen]);
+
+  // Post-exit ScrollTrigger refresh: exactly ONCE after preloader finishes
+  const hasRefreshedRef = useRef(false);
+  useEffect(() => {
+    if (!preloaderDone || hasRefreshedRef.current) return;
+    hasRefreshedRef.current = true;
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+  }, [preloaderDone]);
 
   const isAnyModalOpen = isConsoleOpen || isVideoModalOpen || isModelModalOpen;
 
@@ -65,36 +78,41 @@ export const Home: React.FC = () => {
     <>
       <Preloader onComplete={() => setPreloaderDone(true)} />
 
-      <PageLayout headerVariant="hero">
-        <div className="home-page-flow">
-          {/* F2: Hero Section */}
-          <Hero isReady={preloaderDone} />
+      <div
+        className="app-content-shell"
+        inert={!preloaderDone ? true : undefined}
+      >
+        <PageLayout headerVariant="hero" lenisEnabled={preloaderDone}>
+          <div className="home-page-flow">
+            {/* F2: Hero Section */}
+            <Hero isReady={preloaderDone} />
 
-          {/* F2: Intro Statement (with Lando Norris scroll highlight text) */}
-          <Intro />
+            {/* F2: Intro Statement (with Lando Norris scroll highlight text) */}
+            <Intro />
 
-          {/* Flying Kinetic Mediums Marquee (3D/CGI, Graphic, Motion, Photo, Film) */}
-          <KineticDisciplines />
+            {/* Flying Kinetic Mediums Marquee (3D/CGI, Graphic, Motion, Photo, Film) */}
+            <KineticDisciplines />
 
-          {/* F3: Selected Works / Horizontal Reel */}
-          <Reel />
+            {/* F3: Selected Works / Horizontal Reel */}
+            <Reel />
 
-          {/* F4: 3D ModelStage Centerpiece */}
-          <ModelStage onModalStateChange={setIsModelModalOpen} />
+            {/* F4: 3D ModelStage Centerpiece */}
+            <ModelStage onModalStateChange={setIsModelModalOpen} />
 
-          {/* F5: What I Make (Disciplines) */}
-          <Disciplines />
+            {/* F5: What I Make (Disciplines) */}
+            <Disciplines />
 
-          {/* F5: About & Verified Timeline */}
-          <About />
+            {/* F5: About & Verified Timeline */}
+            <About />
 
-          {/* F5: Meet Afrizal — Self Introduction Video Facade */}
-          <WatchIntroSection onOpenVideo={() => setIsVideoModalOpen(true)} />
+            {/* F5: Meet Afrizal — Self Introduction Video Facade */}
+            <WatchIntroSection onOpenVideo={() => setIsVideoModalOpen(true)} />
 
-          {/* F5: Contact, Canonical Attribution, Developer CTA */}
-          <ContactFooter />
-        </div>
-      </PageLayout>
+            {/* F5: Contact, Canonical Attribution, Developer CTA */}
+            <ContactFooter />
+          </div>
+        </PageLayout>
+      </div>
 
       {/* Floating Developer CLI Trigger (>_) */}
       <ConsoleTrigger

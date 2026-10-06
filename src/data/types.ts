@@ -36,6 +36,8 @@ export type ReelAlignment =
   | 'up'
   | 'down';
 
+export type AssetStatus = 'placeholder' | 'ready';
+
 export interface Project {
   id: string;
   title: string;
@@ -45,6 +47,7 @@ export interface Project {
   caption?: string;
   reelLayout?: ReelLayout;
   alignment?: ReelAlignment;
+  assetStatus?: AssetStatus;
 }
 
 export interface DisciplineItem {

@@ -26,6 +26,7 @@ export interface TranslationSchema {
   preloader: {
     loading: string;
     status: string;
+    ready: string;
   };
   intro: {
     statement: string;
