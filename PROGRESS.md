@@ -127,3 +127,13 @@
 - **Reduced-motion fallback**: Pengguna dengan preferensi `prefers-reduced-motion: reduce` menerima layout native horizontal scroll tanpa pin atau transform animation, menjaga kenyamanan dan aksesibilitas penuh.
 - **Placeholder asset status**: Menampilkan 8 proyek placeholder terstruktur dengan asymmetric aspect ratio (`portrait`, `tall`, `landscape`, `wide`, `square`) dan editorial stagger alignment (`up`, `down`, `center`). Media container menggunakan wireframe SVG geometris dan label literal (`[3D MODEL PLACEHOLDER]`, `[PROJECT POSTER]`, dll.) tanpa artwork fiktif. Kartu 3D diutamakan dengan border Flare dan visual depth tanpa Three.js Canvas. Panel editorial Start, Process Note, dan Closing terintegrasi rapi di dalam rail.
 - Build production lolos verifikasi (`npm run build`).
+
+## Sprint 7 — Intro Autoplay
+
+- Replaced Intro scroll-scrub reveal with a one-shot viewport-triggered GSAP timeline.
+- Removed scrub dependency and retained normal document flow with no pin.
+- Preserved accent styling by animating opacity/transform instead of universal text color.
+- Tightened inter-word spacing without changing typography.
+- Reduced-motion renders the final readable state immediately.
+- Limitation note on CJK: Locales without standard whitespace delimiters (JA, ZH) animate the manifesto sentence as a single unit without artificial word breaking or Intl.Segmenter dependencies.
+
