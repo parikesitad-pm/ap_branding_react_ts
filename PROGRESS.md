@@ -146,4 +146,15 @@
 - Deferred scroll-based timeScale boost for stability.
 - Reduced-motion renders the marquee as static readable discipline rows.
 
+## Sprint 9 — Honeycomb Preloader
+
+- Replaced hardcoded 0→75→100 loading with typed weighted readiness tasks.
+- Added future-ready asset manifest gated by explicit `assetStatus: 'ready'`; current placeholders are never fetched.
+- Kept GLB binaries and ModelCanvas deferred to preserve F4 lazy loading.
+- Added per-task watchdogs and a global safety ceiling so stalled requests cannot brick the site.
+- Gated underlying interaction and Lenis until the loader exits, then refreshed ScrollTrigger once.
+- Added deterministic SVG-surface honeycomb cells on 3D-transformable HTML wrappers with center-out fracture reveal.
+- Reduced-motion still waits for readiness but exits with a short simple transition.
+
+
 

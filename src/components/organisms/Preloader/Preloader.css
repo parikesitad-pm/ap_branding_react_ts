@@ -5,24 +5,65 @@
   width: 100vw;
   height: 100vh;
   height: 100svh;
-  background-color: var(--ink);
-  color: var(--chalk);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--pad);
-  clip-path: inset(0 0 0 0);
   pointer-events: all;
   user-select: none;
+  overflow: hidden;
 }
 
+/* Solid background plane behind honeycomb; fades transparent at fracture start */
+.preloader-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+  z-index: 1;
+  will-change: opacity;
+}
+
+/* 3D Honeycomb Scene with perspective */
+.honeycomb-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Positioned HTML hex cell wrappers */
+.hex-cell {
+  position: absolute;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.hex-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Preloader Content layer sitting atop honeycomb */
 .preloader-content {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.5rem;
   max-width: 600px;
   width: 100%;
+  padding: var(--pad);
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .preloader-brand {
@@ -71,4 +112,3 @@
   white-space: nowrap;
   border-width: 0;
 }
-
